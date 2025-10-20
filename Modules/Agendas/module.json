@@ -11,6 +11,7 @@
     "files": [],
     "requires": [],
     "grupo": "1",
-    "titulo": "Agenda",
-    "icono": "far fa-calendar-alt text-primary mr-5"
+    "activo": "1",
+    "titulo": "Agenda PINK",
+    "icono": "far fa-calendar-alt text-light mr-5"
 }

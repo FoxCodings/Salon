@@ -11,5 +11,16 @@
     "Reportes": true,
     "Nomina": true,
     "Agenda2": true,
-    "Empleados": true
+    "Empleados": true,
+    "Clientes2": true,
+    "Empleados2": true,
+    "Promociones2": true,
+    "Nomina2": true,
+    "Reportes2": true,
+    "Catalogos2": true,
+    "Ventas2": true,
+    "Expedientes": true,
+    "Proveedores": true,
+    "Proveedores2": true,
+    "Whatsapp": true
 }

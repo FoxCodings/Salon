@@ -57,18 +57,74 @@ License: You must have a valid license purchased only from themeforest(the above
       <script src="/admin/assets/plugins/global/plugins.bundle.js?v=7.0.6"></script> -->
      <script src="/admin/assets/plugins/custom/prismjs/prismjs.bundle.js?v=7.0.6"></script>
      <script src="/admin/assets/js/scripts.bundle.js?v=7.0.6"></script>
+
+   <!--   <style media="screen">
+        .dataTables_wrapper .dataTable td.sorting_desc, .dataTables_wrapper .dataTable th.sorting_desc {
+        color: #000 !important;
+        }
+
+        .aside-menu .menu-nav > .menu-item.menu-item-active > .menu-heading, .aside-menu .menu-nav > .menu-item.menu-item-active > .menu-link {
+        background-color: #C9A94E;
+        }
+
+        .aside-menu .menu-nav > .menu-item:not(.menu-item-parent):not(.menu-item-open):not(.menu-item-here):not(.menu-item-active):hover > .menu-heading, .aside-menu .menu-nav > .menu-item:not(.menu-item-parent):not(.menu-item-open):not(.menu-item-here):not(.menu-item-active):hover > .menu-link {
+        background-color: #C9A94E;
+        border-radius: 0.5rem;
+        margin: 10px;
+        padding: 9px 25px;
+        }
+
+        .aside-menu .menu-nav > .menu-item.menu-item-open > .menu-heading, .aside-menu .menu-nav > .menu-item.menu-item-open > .menu-link {
+        background-color: #C9A94E;
+        border: 0.0625rem solid #C9A94E;
+        border-radius: 0.5rem;
+        }
+
+        .btn.btn-light-primary:hover:not(.btn-text):not(:disabled):not(.disabled) {
+          color: #FFFFFF;
+          background-color: #C9A94E;
+          border-color: transparent;
+        }
+
+        .btn.btn-light-primary {
+          color: #fff;
+          background-color: #C9A94E;
+          border-color: transparent;
+        }
+
+        .btn.btn-default {
+          color: #fff;
+          background-color: #C9A94E;
+          border-color: #C9A94E;
+        }
+
+        .btn.btn-default.focus:not(.btn-text), .btn.btn-default:focus:not(.btn-text), .btn.btn-default:hover:not(.btn-text):not(:disabled):not(.disabled) {
+          color: #fff;
+          background-color: #C9A94E;
+          border-color: #C9A94E;
+        }
+
+        .btn.btn-clean i {
+        color: #fff;
+        }
+
+        .symbol.symbol-light-primary .symbol-label {
+          background-color: #C9A94E;
+          color: #fff !important;
+        }
+     </style> -->
     </head>
     <!--end::Head-->
 
     <!--begin::Body-->
-    <body  id="kt_body"  class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading"  >
+    <body  id="kt_body"  class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading"  style="background-image: url('/cremita/img/fondo.png');background-repeat: no-repeat;background-size: 1950px 1050px;" >
 
     	<!--begin::Main-->
 	<!--begin::Header Mobile-->
 <div id="kt_header_mobile" class="header-mobile align-items-center  header-mobile-fixed " >
 	<!--begin::Logo-->
 	<a href="/dashboard">
-		<img alt="Logo" src="/cremita/img/GOLD SISTEM VIT .png" width="170" height="40"/>
+		<img alt="Logo" src="/cremita/img/SPA BLANCO.png" width="150" height="60"/>
 	</a>
 	<!--end::Logo <i class="icon-xl far fa-id-badge"></i>-->
 
@@ -107,10 +163,10 @@ License: You must have a valid license purchased only from themeforest(the above
 <!--begin::Aside-->
 <div class="aside aside-left  aside-fixed  d-flex flex-column flex-row-auto"  id="kt_aside" >
 
-  <div class="brand flex-column-auto " id="kt_brand" style="background:#fff;">
+  <div class="brand flex-column-auto " id="kt_brand" style="background:#AD1457;">
 
     <a href="/dashboard" class="brand-logo">
-      <img alt="Logo" src="/cremita/img/GOLD SISTEM VIT .png" width="170" height="40"/>
+      <img alt="Logo" src="/cremita/img/SPA BLANCO.png" width="150" height="60"/>
     </a>
 
       <button class="brand-toggle btn btn-sm px-0" id="kt_aside_toggle" >
@@ -126,13 +182,13 @@ License: You must have a valid license purchased only from themeforest(the above
 
       </div>
 
-      <div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper" >
+      <div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">
 
         <div
           id="kt_aside_menu"
           class="aside-menu my-4 "
           data-menu-vertical="1"
-           data-menu-scroll="1" data-menu-dropdown-timeout="500"      >
+           data-menu-scroll="1" data-menu-dropdown-timeout="500"  >
 
            <ul class="menu-nav ">
              <li class="menu-item  menu-item-active" aria-haspopup="true" ><a  href="/dashboard_dos" class="menu-link ">
@@ -148,7 +204,7 @@ License: You must have a valid license purchased only from themeforest(the above
              <span class="menu-text">Dashboard</span></a>
              </li>
              <li class="menu-section ">
-               <h4 class="menu-text">Menú</h4>
+               <h4 class="menu-text" style="color:white;">Menú</h4>
                <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
              </li>
              @foreach (obtenerModulosActivos2() as $key => $value)
@@ -156,7 +212,9 @@ License: You must have a valid license purchased only from themeforest(the above
                $alias = $value->get('alias');
                @endphp
                @foreach(obtenerModulo2() as $values)
+
                   @php
+
                   $aliast = $values->modulo;
                   @endphp
                  <!--//////////////////// reportes //////////////////////////////////////// -->
@@ -202,7 +260,7 @@ License: You must have a valid license purchased only from themeforest(the above
 			<!--begin::Wrapper-->
 			<div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper" >
     				<!--begin::Header-->
-            <div id="kt_header" class="header  header-fixed " style="background:#ec5a93;">
+            <div id="kt_header" class="header  header-fixed " style="background:#f8bbd0;">
             	<!--begin::Container-->
             	<div class=" container-fluid  d-flex align-items-stretch justify-content-between" >
             					<!--begin::Header Menu Wrapper-->
@@ -220,8 +278,8 @@ License: You must have a valid license purchased only from themeforest(the above
 
             	            <div class="topbar-item" data-toggle="dropdown" data-offset="10px,0px" onclick="boton_quitar()">
                             <div class="btn btn-icon btn-clean btn-lg mr-1" style="color: #fff;
-                                background-color: #ec5a93;
-                                border-color: #ec5a93;">
+                                background-color: #C9A94E;
+                                border-color: #C9A94E;">
                                 <i class="far fa-bell icon-md text-white mr-5"></i>
                                 <span style="top:-1px;left:-3px" id="mensaje1"></span>
                             </div>
@@ -270,12 +328,12 @@ License: You must have a valid license purchased only from themeforest(the above
 
                 <div class="dropdown">
                   <div class="topbar-item" data-toggle="dropdown" data-offset="50px,0px" aria-expanded="false">
-                      <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2"  style="color: #fff;
-                          background-color: #ec5a93;
-                          border-color: #ec5a93;">
-            		         <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1"><span style="color:white;">Hola,</span>  </span>
-                          <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3"><span style="color:white;">{{ Auth::user()->nombre }} {{ Auth::user()->apellido_paterno }} {{ Auth::user()->apellido_materno }}</span></span>
-                          <span class="symbol symbol-lg-35 symbol-25 symbol-light-primary">
+                      <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2"  style="color: #AD1457;
+                          background-color: #f8bbd0;
+                          border-color: #f8bbd0;">
+            		         <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1"><span style="color:#e91e63;">Hola,</span>  </span>
+                          <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3"><span style="color:#e91e63;">{{ Auth::user()->nombre }} {{ Auth::user()->apellido_paterno }} {{ Auth::user()->apellido_materno }}</span></span>
+                          <span class="symbol symbol-lg-35 symbol-25 symbol-light-primary" style="color:#e91e63 !important;">
                               <span class="symbol-label font-size-h5 font-weight-bold"><i class="far fa-id-badge"></i></span>
                           </span>
                       </div>
@@ -343,7 +401,7 @@ License: You must have a valid license purchased only from themeforest(the above
           		<!--begin::Copyright-->
           		<div class="text-dark order-2 order-md-1">
           			<span class="text-muted font-weight-bold mr-2"><?php echo date('Y'); ?>&copy;</span>
-          			<a  target="_blank" class="text-dark-75 text-hover-primary">HHVA89</a>
+          			<a  target="_blank" class="text-dark-75 text-hover-primary">FOXCODINGS</a>
           		</div>
           		<!--end::Copyright-->
 

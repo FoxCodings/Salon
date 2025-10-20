@@ -4,6 +4,7 @@
     "description": "",
     "keywords": [],
     "priority": 0,
+    "activo": "1",
     "providers": [
         "Modules\\Ventas\\Providers\\VentasServiceProvider"
     ],
@@ -12,6 +13,23 @@
     "requires": [],
     "grupo": "1",
     "titulo": "Ventas",
-    "icono": "fas fa-cash-register  text-primary mr-5"
+    "icono": "fas fa-cash-register  text-light mr-5",
+    "contenido": {
+      "Ventas": {
+          "enlace": "/ventas",
+          "icono": "fas fa-table",
+          "permises": [
+
+          ]
+      },
+        "Ver Ventas": {
+            "enlace": "/ventas/ver_ventas",
+            "icono": "fas fa-table",
+            "permises": [
+
+            ]
+        }
+
+    }
 
 }

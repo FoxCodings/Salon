@@ -1,4 +1,4 @@
-@extends('layouts.inicio')
+@extends('layouts.index')
 
 @section('content')
 <div class="card card-custom example example-compact">
@@ -108,103 +108,141 @@ function guardar(){
     var email = $('#email').val();
     var password = $('#password').val();
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var form = document.querySelectorAll('.needs-validation')
-    //console.log(form)
-    // Loop over them and prevent submission
-    Array.prototype.slice.call(form)
-      .forEach(function (form) {
-        form.addEventListener('click', function (event) {
-          if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-          }else{
-            ///////////////////////////////////////////////////////7
-            $.ajax({
-
-                   type:"{{ ( isset($usuarios) ? 'PUT' : 'POST' ) }}", //si existe esta variable usuarios se va mandar put sino se manda post
-
-                   url:"{{ ( isset($usuarios) ) ? '/usuarios/' . $usuarios->id : '/usuarios/create' }}", //si existe usuarios manda la ruta de usuarios el id del usario sino va mandar usuarios crear
-                   headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')//esto siempre debe ir en los ajax
-                   },
-                   data:{
-                     nombre: nombre,
-                     apellido_paterno: apellido_paterno,
-                     apellido_materno: apellido_materno,
-                     tipo_usuario: tipo_usuario,
-                     name: name,
-                     email: email,
-                     password: password,
-                   },
-                    success:function(data){
-                      if (data.success == 'Se Agrego Satisfactoriamente') {
-                        Swal.fire({
-                              title: "Excelente",
-                              text: data.success,
-                              icon: "success",
-                              buttonsStyling: false,
-                              showCancelButton: true,
-                              confirmButtonText: "Continuar Registrando",
-                              cancelButtonText: "No,Gracias",
-                              customClass: {
-                                confirmButton: "btn btn-success btn-sm",
-                                cancelButton: "btn btn-danger btn-sm"
-                              }
-                          }).then(function(result) {
-
-                              if (result.value == true) {
-                                   $('#nombre').val('');
-                                   $('#descripcion').val('');
-                                   $('#precio').val('');
-                                   $('#id_categoria').val('');
-                                   $('#stock').val('');
-                              }else{
-                                location.href ="/usuarios"; //esta es la ruta del modulo
-                              }
-                          })
-
-                      }else if(data.success == 'Ha sido editado con éxito'){
-                        Swal.fire({
-                              title: "Excelente",
-                              text: data.success,
-                              icon: "success",
-                              buttonsStyling: false,
-                              showCancelButton: true,
-                              confirmButtonText: "Continuar Editando",
-                              cancelButtonText: "No,Gracias",
-                              customClass: {
-                                confirmButton: "btn btn-success btn-sm",
-                                cancelButton: "btn btn-danger btn-sm"
-                              }
-                          }).then(function(result) {
-
-                              if (result.value == true) {
-                                 $('#nombre').val('');
-                                 $('#apellido_paterno').val('');
-                                 $('#apellido_materno').val('');
-                                 $('#tipo_usuario').val('');
-                                 $('#name').val('');
-                                 $('#email').val('');
-                                 $('#password').val('');
-                              }else{
-                                location.href ="/usuarios";
-                              }
-                          })
-                      }else{
-
-                      }
 
 
+      if (nombre == '' || apellido_paterno == '' || tipo_usuario == '' || name == '' || email == '' || password == '') {
+        var form = document.querySelectorAll('.needs-validation')
+        //console.log(form)
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(form)
+          .forEach(function (form) {
+            form.addEventListener('click', function (event) {
+              if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+              }
 
-                    }
-              });
+              form.classList.add('was-validated')
+            }, false)
+          });
+      }else{
+        ///////////////////////////////////////////////////////7
+        $.ajax({
 
-            /////////////////////////////////////////////////////////
-          }
+               type:"{{ ( isset($usuarios) ? 'PUT' : 'POST' ) }}", //si existe esta variable usuarios se va mandar put sino se manda post
 
-          form.classList.add('was-validated')
-        }, false)
-      });
+               url:"{{ ( isset($usuarios) ) ? '/usuarios/' . $usuarios->id : '/usuarios/create' }}", //si existe usuarios manda la ruta de usuarios el id del usario sino va mandar usuarios crear
+               headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')//esto siempre debe ir en los ajax
+               },
+               data:{
+                 nombre: nombre,
+                 apellido_paterno: apellido_paterno,
+                 apellido_materno: apellido_materno,
+                 tipo_usuario: tipo_usuario,
+                 name: name,
+                 email: email,
+                 password: password,
+               },
+                success:function(data){
+                  if (data.success == 'Se Agrego Satisfactoriamente') {
+
+                    Swal.fire({
+                      title: "Felicidades!",
+                      text: data.success,
+                      icon: "success",
+                      buttonsStyling: false,
+                      timer: 1500,
+                        showConfirmButton: false,
+                    }).then(function(result) {
+
+                        if (result.value == true) {
+
+                        }else{
+                          location.href ="/usuarios";
+                        //  $('.botoncito').show();
+                        }
+                    })
+
+
+                    // Swal.fire({
+                    //       title: "Excelente",
+                    //       text: data.success,
+                    //       icon: "success",
+                    //       buttonsStyling: false,
+                    //       showCancelButton: true,
+                    //       confirmButtonText: "Continuar Registrando",
+                    //       cancelButtonText: "No,Gracias",
+                    //       customClass: {
+                    //         confirmButton: "btn btn-success btn-sm",
+                    //         cancelButton: "btn btn-danger btn-sm"
+                    //       }
+                    //   }).then(function(result) {
+                    //
+                    //       if (result.value == true) {
+                    //            $('#nombre').val('');
+                    //            $('#descripcion').val('');
+                    //            $('#precio').val('');
+                    //            $('#id_categoria').val('');
+                    //            $('#stock').val('');
+                    //       }else{
+                    //         location.href ="/usuarios"; //esta es la ruta del modulo
+                    //       }
+                    //   })
+
+                  }else if(data.success == 'Ha sido editado con éxito'){
+                    Swal.fire({
+                      title: "Felicidades!",
+                      text: data.success,
+                      icon: "success",
+                      buttonsStyling: false,
+                      timer: 1500,
+                        showConfirmButton: false,
+                    }).then(function(result) {
+
+                        if (result.value == true) {
+
+                        }else{
+                          location.href ="/usuarios";
+                          //$('.botoncito').show();
+                        }
+                    })
+                    // Swal.fire({
+                    //       title: "Excelente",
+                    //       text: data.success,
+                    //       icon: "success",
+                    //       buttonsStyling: false,
+                    //       showCancelButton: true,
+                    //       confirmButtonText: "Continuar Editando",
+                    //       cancelButtonText: "No,Gracias",
+                    //       customClass: {
+                    //         confirmButton: "btn btn-success btn-sm",
+                    //         cancelButton: "btn btn-danger btn-sm"
+                    //       }
+                    //   }).then(function(result) {
+                    //
+                    //       if (result.value == true) {
+                    //          $('#nombre').val('');
+                    //          $('#apellido_paterno').val('');
+                    //          $('#apellido_materno').val('');
+                    //          $('#tipo_usuario').val('');
+                    //          $('#name').val('');
+                    //          $('#email').val('');
+                    //          $('#password').val('');
+                    //       }else{
+                    //         location.href ="/usuarios";
+                    //       }
+                    //   })
+                  }else{
+
+                  }
+
+
+
+                }
+          });
+
+      }
 
 
 }

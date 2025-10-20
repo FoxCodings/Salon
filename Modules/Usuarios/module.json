@@ -3,7 +3,7 @@
     "alias": "usuarios",
     "description": "",
     "keywords": [],
-    "active": 1,
+    "activo": 1,
     "order": 1,
     "providers": [
         "Modules\\Usuarios\\Providers\\UsuariosServiceProvider"
@@ -13,10 +13,17 @@
     "requires": [],
     "grupo": "3",
     "titulo": "Configuraciónes",
-    "icono": "fas fa-cog  text-primary mr-5",
+    "icono": "fas fa-cog  text-light mr-5",
     "contenido": {
         "Usuarios": {
             "enlace": "/usuarios",
+            "icono": "fas fa-table",
+            "permises": [
+
+            ]
+        },
+        "Negocio": {
+            "enlace": "/usuarios/negocios",
             "icono": "fas fa-table",
             "permises": [
 
@@ -31,6 +38,13 @@
         },
         "Permisos": {
             "enlace": "/usuarios/permisos",
+            "icono": "fas fa-table",
+            "permises": [
+
+            ]
+        },
+        "Archivos": {
+            "enlace": "/usuarios/archivos",
             "icono": "fas fa-table",
             "permises": [
 

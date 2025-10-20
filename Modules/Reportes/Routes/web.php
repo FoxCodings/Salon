@@ -12,5 +12,8 @@
 */
 
 Route::prefix('reportes')->group(function() {
-    Route::get('/', 'ReportesController@index');
+  Route::get('/', 'ReportesController@index');
+  Route::get('/reporteNomina/{fecha1}/{fecha2}', 'ReportesController@Nomina');
+  Route::get('/reporteCliente/{empleado}/{fecha1}/{fecha2}', 'ReportesController@NominaEmpleado');
+
 });

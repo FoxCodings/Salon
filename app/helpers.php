@@ -24,7 +24,62 @@ if (! function_exists('obtenerModulosActivos')) {
     $tmp = [];
     foreach ($modulos as $key => $value) {
 
-      if($value->get('grupo') == 1 || $value->get('grupo') == 3){
+      if($value->get('grupo') == 1 &&  $value->get('activo') == 1 || $value->get('grupo') == 3 &&  $value->get('activo') == 1 ){
+        $tmp[( $titulo = $value->get('titulo') ) ? $titulo : $value->get('name')] = $value;
+        ksort($tmp);
+      }else{
+        $tmp;
+      }
+
+      // if ($value->get('active') === 0) {
+      //   unset($modulos[$key]);
+      //
+      //
+      // }else {
+      //   $tmp[( $titulo = $value->get('titulo') ) ? $titulo : $value->get('name')] = $value;
+      // }
+    }
+
+    //dd($tmp);
+    return $tmp;
+  }
+}
+
+
+if (! function_exists('obtenerModulosActivosUsuarios')) {
+  function obtenerModulosActivosUsuarios() {
+    $modulos = Module::all();
+    $tmp = [];
+    foreach ($modulos as $key => $value) {
+
+      if($value->get('grupo') == 3){
+        $tmp[( $titulo = $value->get('titulo') ) ? $titulo : $value->get('name')] = $value;
+        ksort($tmp);
+      }else{
+        $tmp;
+      }
+
+      // if ($value->get('active') === 0) {
+      //   unset($modulos[$key]);
+      //
+      //
+      // }else {
+      //   $tmp[( $titulo = $value->get('titulo') ) ? $titulo : $value->get('name')] = $value;
+      // }
+    }
+
+    //dd($tmp);
+    return $tmp;
+  }
+}
+
+if (! function_exists('obtenerModulosTodos')) {
+  function obtenerModulosTodos() {
+    $modulos = Module::all();
+    $tmp = [];
+    foreach ($modulos as $key => $value) {
+
+      if($value->get('grupo') == 1 || $value->get('grupo') == 3 || $value->get('grupo') == 2){
         $tmp[( $titulo = $value->get('titulo') ) ? $titulo : $value->get('name')] = $value;
         ksort($tmp);
       }else{
@@ -100,7 +155,7 @@ if (! function_exists('obtenerModulo')) {
     //   dd($value->modulo);
     //
     // }
-  //dd($modulos);
+
 
     return $modulos;
   }
@@ -134,7 +189,7 @@ if (! function_exists('obtenerModulo2')) {
     //
     // }
   //dd($modulos);
-
+  //dd($modulos);
     return $modulos;
   }
 }
@@ -233,6 +288,46 @@ if (!function_exists('generarDropdown')) {
     return "";
   }
 }
+
+if (!function_exists('generarDropdownes')) {
+  function generarDropdownes( $acciones = [] ){
+    if (count($acciones) > 0) {
+      $dropdown =
+        "<div class='btn-group '>
+          <button type='button' class='btn btn-light dropdown-toggle' data-toggle='dropdown' aria-expanded='false'><i class='fas fa-align-justify'></i><span class='caret'></span> </button>
+          <div class='dropdown-menu '  >";
+      foreach ($acciones as $key => $value) {
+        $attrData = "";
+        if (array_key_exists('data', $value)) {
+          foreach ($value['data'] as $keyData => $data) {
+            $attrData .= " data-" . $keyData . "='" . $data . "'" ;
+          }
+        }
+        if ( array_key_exists('onclick', $value) ) {
+          $dropdown .=
+            "<div class='dropdown-item' onclick=".$value["onclick"]." ".$attrData.">
+              $key
+            </div>";
+        }else if(array_key_exists('href', $value)) {
+          $dropdown .=
+            "<a class='dropdown-item' href='".$value["href"]."' ".$attrData.
+            (array_key_exists('target', $value) ? " target='".$value["target"]."'" : "").">
+              $key
+            </a>";
+        }else if(array_key_exists('class', $value)) {
+          $dropdown .=
+            "<a class='dropdown-item " . $value["class"] . "' href='javascript:void(0);' ".$attrData.">
+              $key
+            </a>";
+        }
+      }
+      $dropdown .= "</div></div>";
+      return $dropdown;
+    }
+    return "";
+  }
+}
+
 // if (!function_exists('permiso')) {
 //   function permiso( $claveModulo, $accion = false ){
 //

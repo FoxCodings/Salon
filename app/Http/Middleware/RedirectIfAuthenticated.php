@@ -23,8 +23,18 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+
+              //dd(Auth::user()->tipo_usuario);
+
+              if (Auth::user()->tipo_usuario == 1) {
+                return redirect('/dashboard');
+              }else if(Auth::user()->tipo_usuario == 2 && Auth::user()->modulo == 2){
+                return redirect('/ventas2');
+              }
+              //return redirect(RouteServiceProvider::HOME);
             }
+
+
         }
 
         return $next($request);

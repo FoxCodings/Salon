@@ -1,0 +1,17 @@
+{
+    "name": "Reportes2",
+    "alias": "reportes2",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Reportes2\\Providers\\Reportes2ServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": [],
+    "grupo": "2",
+    "activo": "1",
+    "titulo": "Reportes Spa",
+    "icono": "far fa-file-excel  text-light mr-5"
+}

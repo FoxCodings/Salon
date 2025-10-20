@@ -29,5 +29,6 @@ Route::group(["middleware" => ['auth:sanctum', 'verified']], function(){
   Route::get('dashboard_uno', [HomeController::class, 'dashboard_uno']);
   Route::get('dashboard_dos', [HomeController::class, 'dashboard_dos']);
   Route::post('/actualizar' , [HomeController::class, 'actualizar']);
+  Route::get('/cumpleanos' , [HomeController::class, 'cumpleanos']);
 
 });

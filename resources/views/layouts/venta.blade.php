@@ -53,11 +53,59 @@ License: You must have a valid license purchased only from themeforest(the above
       <script src="/admin/assets/plugins/global/plugins.bundle.js?v=7.0.6"></script> -->
      <script src="/admin/assets/plugins/custom/prismjs/prismjs.bundle.js?v=7.0.6"></script>
      <script src="/admin/assets/js/scripts.bundle.js?v=7.0.6"></script>
+     <style media="screen">
+        .btn.btn-clean:not(:disabled):not(.disabled):active:not(.btn-text), .btn.btn-clean:not(:disabled):not(.disabled).active, .show > .btn.btn-clean.dropdown-toggle, .show .btn.btn-clean.btn-dropdown {
+        color: #ec5a93;
+        background-color: #4c9391;
+        border-color: transparent;
+        }
+
+        .btn.btn-clean:hover:not(.btn-text):not(:disabled):not(.disabled), .btn.btn-clean:focus:not(.btn-text), .btn.btn-clean.focus:not(.btn-text) {
+          color: #ec5a93;
+          background-color: #4c9391;
+          border-color: transparent;
+        }
+        body {width: 100%;}
+
+        .dataTables_wrapper .dataTable td.sorting_desc, .dataTables_wrapper .dataTable th.sorting_desc {
+        color: #000 !important;
+        }
+
+
+
+        .btn.btn-clean:hover:not(.btn-text):not(:disabled):not(.disabled), .btn.btn-clean:focus:not(.btn-text), .btn.btn-clean.focus:not(.btn-text) {
+        color: #C9A94E;
+        background-color: #C9A94E;
+        border-color: transparent;
+        }
+
+        .btn.btn-default {
+          color: #fff;
+          background-color: #C9A94E;
+          border-color: #C9A94E;
+        }
+
+        .btn.btn-default.focus:not(.btn-text), .btn.btn-default:focus:not(.btn-text), .btn.btn-default:hover:not(.btn-text):not(:disabled):not(.disabled) {
+          color: #fff;
+          background-color: #C9A94E;
+          border-color: #C9A94E;
+        }
+
+        .btn.btn-clean i {
+        color: #fff;
+        }
+
+        .symbol.symbol-light-primary .symbol-label {
+          background-color: #C9A94E;
+          color: #fff !important;
+        }
+
+     </style>
     </head>
     <!--end::Head-->
 
     <!--begin::Body-->
-    <body  id="kt_body"   class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed page-loading"   >
+    <body  id="kt_body"   class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed page-loading"  style="background-image: url('/cremita/img/fondo.png');background-repeat: no-repeat;background-size: 1950px 950px;"  >
 
     	<!--begin::Main-->
 	<!--begin::Header Mobile-->
@@ -115,7 +163,7 @@ License: You must have a valid license purchased only from themeforest(the above
           			<div class="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
 
                   <div class="header-logo">
-                    @if(Auth::user()->tipo_usuario == 1)
+                    @if(Auth::user()->tipo_usuario == 1 || Auth::user()->tipo_usuario == 3)
                     <a href="/dashboard_uno">
         							<img alt="Logo" src="/cremita/img/PINK AND GOLD EN BLANCO.png" width="120" height=""/>
         						</a>
@@ -130,13 +178,13 @@ License: You must have a valid license purchased only from themeforest(the above
 
           			</div>
 
-            		<div class="topbar" >
+            		<div class="topbar" style="color: #fff;
+                background-color: #ec5a93;
+                border-color: #ec5a93;">
 
                 <div class="dropdown">
                   <div class="topbar-item" data-toggle="dropdown" data-offset="50px,0px" aria-expanded="false">
-                      <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2"  style="color: #fff;
-                      background-color: #ec5a93;
-                      border-color: #ec5a93;">
+                      <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2"  >
             		         <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1"><span style="color:white;">Hola,</span>  </span>
                           <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3"><span style="color:white;">{{ Auth::user()->nombre }} {{ Auth::user()->apellido_paterno }} {{ Auth::user()->apellido_materno }}</span></span>
                           <span class="symbol symbol-lg-35 symbol-25 symbol-light-primary">
@@ -185,7 +233,7 @@ License: You must have a valid license purchased only from themeforest(the above
             <!--end::Header-->
 
     				<!--begin::Content-->
-    				<div class="content  d-flex flex-column flex-column-fluid" id="kt_content">
+            <div class="content  d-flex flex-column flex-column-fluid" id="kt_content">
               <!-- -->
 
                 @yield('content')
@@ -201,7 +249,7 @@ License: You must have a valid license purchased only from themeforest(the above
           		<!--begin::Copyright-->
           		<div class="text-dark order-2 order-md-1">
           			<span class="text-muted font-weight-bold mr-2"><?php echo date('Y'); ?>&copy;</span>
-          			<a href="" target="_blank" class="text-dark-75 text-hover-primary">Gold System Vit</a>
+          			<a href="" target="_blank" class="text-dark-75 text-hover-primary">FOXCODINGS</a>
           		</div>
           		<!--end::Copyright-->
 
@@ -238,116 +286,183 @@ License: You must have a valid license purchased only from themeforest(the above
 
 
 
+<ul class="sticky-toolbar nav flex-column pl-2 pr-2 pt-3 pb-3 mt-4">
+	<!--begin::Item-->
+	<li class="nav-item mb-2" id="kt_demo_panel_toggle" data-toggle="tooltip" title="" data-placement="right" data-original-title="Nuevos Clientes">
+		<a class="btn btn-sm btn-icon btn-bg-light btn-icon-success btn-hover-success" data-toggle="modal" data-target="#cliente_nuevo">
+			<i class="flaticon-users-1"></i>
+		</a>
+	</li>
+	<!--end::Item-->
+
+	<!--begin::Item-->
+	<!-- <li class="nav-item mb-2" data-toggle="tooltip" title="" data-placement="left" data-original-title="Agendar Cita">
+      <a class="btn btn-sm btn-icon btn-bg-light btn-icon-success btn-hover-succes"  data-toggle="modal" data-target="#agendar_cita"  target="_blank">
+			<i class="flaticon-calendar-1"></i>
+		</a>
+	</li> -->
+	<!--end::Item-->
+
+	<!--begin::Item-->
+	<li class="nav-item mb-2" data-toggle="tooltip" title="" data-placement="left" data-original-title="Promoción Mensual">
+		<a class="btn btn-sm btn-icon btn-bg-light btn-icon-success btn-hover-succes" data-toggle="modal" data-target="#promocion_mensual" >
+			<i class="flaticon-price-tag"></i>
+		</a>
+	</li>
+
+  <li class="nav-item mb-2" data-toggle="tooltip" title="" data-placement="left" data-original-title="Promoción Cumpleaños">
+    <a class="btn btn-sm btn-icon btn-bg-light btn-icon-success btn-hover-succes" data-toggle="modal" data-target="#promocion_cumpleanos" >
+      <i class="flaticon-price-tag"></i>
+    </a>
+  </li>
+
+  <li class="nav-item mb-2" data-toggle="tooltip" title="" data-placement="left" data-original-title="Agendar Cita">
+      <a class="btn btn-sm btn-icon btn-bg-light btn-icon-success btn-hover-succes"  href="/agenda2"  target="_blank">
+			<i class="flaticon-calendar-1"></i>
+		</a>
+	</li>
+	<!--end::Item-->
+
+			<!--begin::Item-->
+		<!-- <li class="nav-item" id="kt_sticky_toolbar_chat_toggler" data-toggle="tooltip" title="" data-placement="left" data-original-title="Preventas">
+			<a class="btn btn-sm btn-icon btn-bg-light btn-icon-success btn-hover-succes" onclick="tablapreventas()">
+				<i class="flaticon-bag "></i>
+			</a>
+		</li> -->
+		<!--end::Item-->
+
+    <!--begin::Item-->
+  <!-- <li class="nav-item" id="kt_sticky_toolbar_chat_toggler" data-toggle="tooltip" title="" data-placement="left" data-original-title="Cumpleaños del Mes">
+    <a class="btn btn-sm btn-icon btn-bg-light btn-icon-success btn-hover-succes" onclick="cumpleanosMes()">
+      <i class="flaticon-event-calendar-symbol"></i>
+    </a>
+  </li> -->
+  <!--end::Item-->
+	</ul>
+
+
+
+
+
+  <ul class="sticky-toolbar nav flex-column pl-2 pr-2 pt-3 pb-3 mt-4" style="left: 0;">
+  	<!--begin::Item-->
+  	<!-- <li class="nav-item mb-2" id="kt_demo_panel_toggle" data-toggle="tooltip" title="" data-placement="right" data-original-title="Venta Servicio">
+  		<a class="btn btn-sm btn-icon btn-bg-light btn-icon-success btn-hover-success" onclick="ventaServicio()">
+  			<i class="flaticon2-shopping-cart"></i>
+  		</a>
+  	</li> -->
+  	<!--end::Item-->
+
+  	<!--begin::Item-->
+  	<li class="nav-item mb-2" id="kt_demo_panel_toggle" data-toggle="tooltip" title="" data-placement="left" data-original-title="Venta Productos">
+        <a class="btn btn-sm btn-icon btn-bg-light btn-icon-success btn-hover-succes" onclick="ventaProducto()">
+  			<i class="flaticon2-shopping-cart"></i>
+  		</a>
+  	</li>
+  	<!--end::Item-->
+  	</ul>
+
+
+
         <script>var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";</script>
         <!--begin::Global Config(global config for global JS scripts)-->
         <script>
             var KTAppSettings = {
-    "breakpoints": {
-        "sm": 576,
-        "md": 768,
-        "lg": 992,
-        "xl": 1200,
-        "xxl": 1400
-    },
-    "colors": {
-        "theme": {
-            "base": {
-                "white": "#ffffff",
-                "primary": "#3699FF",
-                "secondary": "#E5EAEE",
-                "success": "#1BC5BD",
-                "info": "#8950FC",
-                "warning": "#FFA800",
-                "danger": "#F64E60",
-                "light": "#E4E6EF",
-                "dark": "#181C32"
-            },
-            "light": {
-                "white": "#ffffff",
-                "primary": "#E1F0FF",
-                "secondary": "#EBEDF3",
-                "success": "#C9F7F5",
-                "info": "#EEE5FF",
-                "warning": "#FFF4DE",
-                "danger": "#FFE2E5",
-                "light": "#F3F6F9",
-                "dark": "#D6D6E0"
-            },
-            "inverse": {
-                "white": "#ffffff",
-                "primary": "#ffffff",
-                "secondary": "#3F4254",
-                "success": "#ffffff",
-                "info": "#ffffff",
-                "warning": "#ffffff",
-                "danger": "#ffffff",
-                "light": "#464E5F",
-                "dark": "#ffffff"
+                "breakpoints": {
+                    "sm": 576,
+                    "md": 768,
+                    "lg": 992,
+                    "xl": 1200,
+                    "xxl": 1400
+                },
+                "colors": {
+                    "theme": {
+                        "base": {
+                            "white": "#ffffff",
+                            "primary": "#3699FF",
+                            "secondary": "#E5EAEE",
+                            "success": "#1BC5BD",
+                            "info": "#8950FC",
+                            "warning": "#FFA800",
+                            "danger": "#F64E60",
+                            "light": "#E4E6EF",
+                            "dark": "#181C32"
+                        },
+                        "light": {
+                            "white": "#ffffff",
+                            "primary": "#E1F0FF",
+                            "secondary": "#EBEDF3",
+                            "success": "#C9F7F5",
+                            "info": "#EEE5FF",
+                            "warning": "#FFF4DE",
+                            "danger": "#FFE2E5",
+                            "light": "#F3F6F9",
+                            "dark": "#D6D6E0"
+                        },
+                        "inverse": {
+                            "white": "#ffffff",
+                            "primary": "#ffffff",
+                            "secondary": "#3F4254",
+                            "success": "#ffffff",
+                            "info": "#ffffff",
+                            "warning": "#ffffff",
+                            "danger": "#ffffff",
+                            "light": "#464E5F",
+                            "dark": "#ffffff"
+                        }
+                    },
+                    "gray": {
+                        "gray-100": "#F3F6F9",
+                        "gray-200": "#EBEDF3",
+                        "gray-300": "#E4E6EF",
+                        "gray-400": "#D1D3E0",
+                        "gray-500": "#B5B5C3",
+                        "gray-600": "#7E8299",
+                        "gray-700": "#5E6278",
+                        "gray-800": "#3F4254",
+                        "gray-900": "#181C32"
+                    }
+                },
+                "font-family": "Poppins"
+            };
+
+
+
+            function as2(id) {
+
+              $.ajax({
+
+               type:"POST",
+                 url:"/usuarios/loginAs",
+               headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+               },
+               data:{
+                id : id,
+               },
+
+                success:function(data){
+
+                  if (data == 1) {
+                    location.href ="/dashboard_dos";
+                  }
+
+                }
+              });
+
             }
-        },
-        "gray": {
-            "gray-100": "#F3F6F9",
-            "gray-200": "#EBEDF3",
-            "gray-300": "#E4E6EF",
-            "gray-400": "#D1D3E0",
-            "gray-500": "#B5B5C3",
-            "gray-600": "#7E8299",
-            "gray-700": "#5E6278",
-            "gray-800": "#3F4254",
-            "gray-900": "#181C32"
-        }
-    },
-    "font-family": "Poppins"
-};
-
-
-
-function as2(id) {
-
-  $.ajax({
-
-   type:"POST",
-     url:"/usuarios/loginAs",
-   headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-   },
-   data:{
-    id : id,
-   },
-
-    success:function(data){
-
-      if (data == 1) {
-        location.href ="/dashboard_uno";
-      }
-
-    }
-  });
-
-}
         </script>
 
 
 
+        <script src="/admin/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js?v=7.0.6"></script>
+    <!--end::Page Vendors-->
 
-                    <!--begin::Page Vendors(used by this page)-->
-                            <script src="/admin/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js?v=7.0.6"></script>
-                        <!--end::Page Vendors-->
-
-                    <!--begin::Page Scripts(used by this page)-->
-                            <script src="/admin/assets/js/pages/widgets.js?v=7.0.6"></script>
-                        <!--end::Page Scripts-->
-                        <!--begin::Page Vendors(used by this page)-->
-                                <script src="/admin/assets/plugins/custom/datatables/datatables.bundle.js?v=7.0.6"></script>
-                                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/locales/bootstrap-datepicker.es.min.js" charset="UTF-8"></script>
-                                <script src="/admin/assets/js/pages/custom/login/login-general.js?v=7.0.6"></script>
-                                <script src="/admin/assets/js/pages/crud/forms/widgets/bootstrap-datepicker.js?v=7.0.6"></script>
-                            <!--end::Page Vendors-->
-                            <!-- <script src="/admin/assets/js/pages/crud/forms/widgets/bootstrap-datepicker.js?v=7.0.6"></script>
-                            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/locales/bootstrap-datepicker.es.min.js" charset="UTF-8"></script> -->
-                        <!--begin::Page Scripts(used by this page)-->
-                                <!-- <script src="/admin/assets/js/pages/crud/datatables/basic/basic.js?v=7.0.6"></script> -->
-                            <!--end::Page Scripts-->
+<!--begin::Page Scripts(used by this page)-->
+        <script src="/admin/assets/js/pages/widgets.js?v=7.0.6"></script>
+    <!--end::Page Scripts-->
+    <!--begin::Page Vendors(used by this page)-->
+            <script src="/admin/assets/plugins/custom/datatables/datatables.bundle.js?v=7.0.6"></script>
             </body>
     <!--end::Body-->
 </html>

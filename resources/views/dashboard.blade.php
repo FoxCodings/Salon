@@ -27,9 +27,10 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="/cremita/css/style.css" rel="stylesheet">
+
 </head>
 
-<body>
+<body style="background-image: url('/cremita/img/fondo.png');background-size:100% 200%; background-repeat:no-repeat;">
     <!-- Topbar Start -->
     <div class="container-fluid bg-primary py-3 d-none d-md-block">
         <div class="container">
@@ -44,7 +45,7 @@
         <div class="container-lg position-relative p-0 px-lg-3" style="z-index: 9;">
             <nav class="navbar navbar-expand-lg bg-white navbar-light shadow p-lg-0">
                 <a href="index.html" class="navbar-brand d-block d-lg-none">
-                    <h1 class="m-0 display-4 text-primary"><img src="/cremita/img/GOLD SISTEM VIT .png" width="500" ></h1>
+                    <h1 class="m-0 display-4 text-primary"><img src="/cremita/img/GOLD SISTEM VIT .png" width="200" ></h1>
                 </a>
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
@@ -87,15 +88,19 @@
                     <!-- <div class="owl-carousel service-carousel"> -->
                         <div class="service-item">
                             <div class="service-img mx-auto">
-                                <img class="rounded-circle w-100 h-100 bg-light p-3" src="/cremita/img/LOGO PINK AND GOLD.png" style="object-fit: cover;">
+                                <img class="rounded-circle w-100 h-100 bg-light p-3" src="/cremita/img/LOGO PINK AND GOLD.png"  style="object-fit: cover;">
                             </div>
                             <div class="position-relative text-center bg-light rounded p-4 pb-5" style="margin-top: -75px;">
                                 <h5 class="font-weight-semi-bold mt-5 mb-3 pt-5">PINK AND GOLD</h5>
                                 <!-- <p>Dolor nonumy sed eos sed lorem diam amet eos magna. Dolor kasd lorem duo stet kasd justo</p> -->
-                                @if(Auth::user()->tipo_usuario == 1)
+                                @if(Auth::user()->tipo_usuario == 1 || Auth::user()->tipo_usuario == 3)
+                                <!-- <a href="" class="border-bottom border-secondary text-decoration-none text-secondary">Entrar</a> -->
                                 <a href="/dashboard_uno" class="border-bottom border-secondary text-decoration-none text-secondary">Entrar</a>
+                                @elseif(Auth::user()->tipo_usuario == 2 && Auth::user()->modulo == 1 || Auth::user()->tipo_usuario == 4 && Auth::user()->modulo == 1)
+                                <a href="/dashboard_uno" class="border-bottom border-secondary text-decoration-none text-secondary">Entrar</a>
+                                <!-- <a href="/ventas" class="border-bottom border-secondary text-decoration-none text-secondary">Entrar</a> -->
                                 @else
-                                <a href="/ventas" class="border-bottom border-secondary text-decoration-none text-secondary">Entrar</a>
+                                <br>
                                 @endif
 
                             </div>
@@ -106,12 +111,18 @@
 
                         <div class="service-item">
                             <div class="service-img mx-auto">
-                                <img class="rounded-circle w-100 h-100 bg-light p-3" src="/cremita/img/service-3.jpg" style="object-fit: cover;">
+                                <img class="rounded-circle w-100 h-100 bg-light p-3" src="/cremita/img/LOGO SPA.png"  style="object-fit: cover;">
                             </div>
                             <div class="position-relative text-center bg-light rounded p-4 pb-5" style="margin-top: -75px;">
-                                <h5 class="font-weight-semi-bold mt-5 mb-3 pt-5">SPA</h5>
-                                <!-- <p>Dolor nonumy sed eos sed lorem diam amet eos magna. Dolor kasd lorem duo stet kasd justo</p> -->
-                                <!-- <a href="/dashboard_dos" disabled class="border-bottom border-secondary text-decoration-none text-secondary">Entrar</a> -->
+                                <h5 class="font-weight-semi-bold mt-5 mb-3 pt-5">SPA VIT & lIFE</h5>
+                                @if(Auth::user()->tipo_usuario == 1 || Auth::user()->tipo_usuario == 3)
+                                <a href="/dashboard_dos" disabled class="border-bottom border-secondary text-decoration-none text-secondary">Entrar</a>
+                                @elseif(Auth::user()->tipo_usuario == 2 && Auth::user()->modulo == 2)
+                                <a href="/dashboard_dos" class="border-bottom border-secondary text-decoration-none text-secondary">Entrar</a>
+                                @else
+                                <br>
+                                @endif
+
                             </div>
                         </div>
 
@@ -125,7 +136,7 @@
 
 
     <!-- Footer Start -->
-    <div class="container-fluid footer bg-light py-5" >
+    <!-- <div class="container-fluid footer bg-light py-5" >
         <div class="container text-center py-5">
             <div class="row">
 
@@ -135,7 +146,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Footer End -->
 
 

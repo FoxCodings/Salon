@@ -11,6 +11,7 @@
     "files": [],
     "requires": [],
     "grupo": "1",
-    "titulo": "Reportes",
-    "icono": "far fa-file-excel text-primary mr-5"
+    "activo": "1",
+    "titulo": "Reportes Pink",
+    "icono": "far fa-file-excel text-light mr-5"
 }

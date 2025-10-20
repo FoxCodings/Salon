@@ -21,6 +21,7 @@
     </div>
 </div>
 <div class="card-body">
+  <div class="table-responsive">
 <table class="table table-bordered table-checkable" id="kt_datatable">
   <thead>
     <tr>
@@ -34,6 +35,7 @@
     </thead>
    <tbody></tbody>
 </table>
+</div>
 </div>
 </div>
 <script type="text/javascript">

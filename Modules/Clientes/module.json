@@ -11,6 +11,7 @@
     "files": [],
     "requires": [],
     "grupo": "1",
-    "titulo": "Clientes",
-    "icono": "far fa-address-card text-primary mr-5"
+    "activo": "1",
+    "titulo": "Clientes Pink",
+    "icono": "far fa-address-card text-light mr-5"
 }

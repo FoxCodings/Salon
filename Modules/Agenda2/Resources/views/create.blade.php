@@ -5,7 +5,7 @@
 <div class="card-header">
 <h3 class="card-title">
 
- @isset($eventos) Editar @else Nuevo @endisset   Evento
+ @isset($eventos) Editar @else Nueva @endisset Cita
 </h3>
 <div class="card-toolbar">
 <div class="example-tools justify-content-center">
@@ -18,23 +18,37 @@
 
 
         <div class="row">
-          <div class="col-md-4">
-              <label for="inputPassword4"  style="font-size:12px;"class="form-label">Titulo: </label>
-              <input type="text" class="form-control" id="titulo" value="@isset($eventos) {{ $eventos->titulo }} @endisset" placeholder="Titulo" required>
+          <div class="col-md-3">
+              <label for="inputPassword4"  style="font-size:12px;"class="form-label">Nombre: </label>
+              <input type="text" class="form-control" id="titulo" value="@isset($eventos) {{ $eventos->titulo }} @endisset" placeholder="Nombre" required>
               <div class="invalid-feedback">
-                Por Favor Ingrese Titulo
+                Por Favor Ingrese Nombre
               </div>
           </div>
 
-          <div class="col-md-4">
-              <label for="inputPassword4"  style="font-size:12px;"class="form-label">Descripción: </label>
-              <textarea id="descripcion" rows="8" cols="80" class="form-control" id="descripcion">@isset($eventos) {{ $eventos->descripcion }} @else  @endisset</textarea>
+
+          <div class="col-md-3">
+              <label for="inputPassword4"  style="font-size:12px;"class="form-label">Servicio: </label>
+              <input type="text" class="form-control" id="servicio" value="@isset($eventos) {{ $eventos->servicio }} @endisset" placeholder="Servicio" required>
               <div class="invalid-feedback">
-                Por Favor Ingrese Descripción
+                Por Favor Ingrese Servicio
               </div>
           </div>
 
-          <div class="col-md-4">
+
+          <div class="col-md-3">
+              <label for="inputPassword4"  style="font-size:12px;"class="form-label">Telefono: </label>
+              <input type="text" class="form-control" id="servicio" value="@isset($eventos) {{ $eventos->telefono }} @endisset" placeholder="Telefono" required>
+              <div class="invalid-feedback">
+                Por Favor Ingrese Telefono
+              </div>
+          </div>
+
+
+
+
+
+          <div class="col-md-3">
               <label for="inputPassword4"  style="font-size:12px;"class="form-label">Fecha: </label>
               @isset($eventos)
               <?php
@@ -50,6 +64,17 @@
                 Por Favor Ingrese Fecha
               </div>
           </div>
+
+          <div class="row">
+            <div class="col-md-12">
+                <label for="inputPassword4"  style="font-size:12px;"class="form-label">Descripción: </label>
+                <textarea id="descripcion" rows="8" cols="80" class="form-control" id="descripcion">@isset($eventos) {{ $eventos->descripcion }} @else  @endisset</textarea>
+                <div class="invalid-feedback">
+                  Por Favor Ingrese Descripción
+                </div>
+            </div>
+          </div>
+
 
 
         </div>
@@ -99,10 +124,12 @@ function guardar(){
     @endisset
     var titulo = $('#titulo').val();
     var descripcion = $('#descripcion').val();
+    var servicio = $('#servicio').val();
     var fecha = $('input[name=fecha_defuncion]').val();
 
     formData.append('titulo', titulo);
     formData.append('descripcion', descripcion);
+    formData.append('servicio', servicio);
     formData.append('fecha', fecha);
 
 

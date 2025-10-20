@@ -7,14 +7,17 @@
 
   <!--begin::Login-->
 <div class="login login-4 login-signin-on d-flex flex-row-fluid" id="kt_login">
-<div class="d-flex flex-center flex-row-fluid bgi-size-cover bgi-position-top bgi-no-repeat" style="background-image: url('/admin/assets/media/bg/bg-3.jpg');">
+<div class="d-flex flex-center flex-row-fluid bgi-size-cover bgi-position-top bgi-no-repeat" style="background-image: url('/cremita/img/mujer.png');">
   <div class="login-form text-center p-7 position-relative overflow-hidden">
 
     <div class="d-flex flex-center mb-15">
+      
       <a href="#">
+      <img src="/cremita/img/bienvenida.png"  width="400" alt=""/>
         <img src="/cremita/img/LOGO_GOLD_SYSTEM_VIT.png"  width="400" alt=""/>
 
       </a>
+     
     </div>
 
     <div class="login-signin">
@@ -32,7 +35,9 @@
         </div>
 
         <div class="text-center mt-15">
-          <button id="kt_login_signin_submit" class="btn btn-primary btn-pill shadow-sm py-4 px-9 font-weight-bold">Iniciar Sesión</button>
+          <button id="kt_login_signin_submit" class="btn btn-primary btn-pill shadow-sm py-4 px-9 font-weight-bold">
+           <!--  <img src="/cremita/img/icono.png" width="50" height="20"> -->
+            Iniciar Sesión</button>
         </div>
       </form>
       <div class="mt-10">

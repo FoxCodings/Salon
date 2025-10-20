@@ -1,0 +1,17 @@
+{
+    "name": "Proveedores2",
+    "alias": "proveedores2",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Proveedores2\\Providers\\Proveedores2ServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": [],
+    "grupo": "2",
+    "activo": "1",
+    "titulo": "Proveedores Spa",
+    "icono": "fas fa-cart-arrow-down text-light mr-5"
+}

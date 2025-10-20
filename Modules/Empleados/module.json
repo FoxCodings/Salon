@@ -11,6 +11,7 @@
     "files": [],
     "requires": [],
     "grupo": "1",
-    "titulo": "Empleados",
-    "icono": "fas fa-users text-primary mr-5"
+    "activo": "1",
+    "titulo": "Empleados Pink",
+    "icono": "fas fa-users text-light mr-5"
 }

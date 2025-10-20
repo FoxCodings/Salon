@@ -10,6 +10,7 @@ use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Storage;
 use Yajra\Datatables\Datatables;
 use \App\Models\User;
+use \Modules\Usuarios\Entities\Negocio;
 use Mail;
 use Session;
 use Auth;
@@ -128,10 +129,12 @@ class PromocionesController extends Controller
 
           $descuento = Descuentos::find($request->descuentos_promocion);
 
+          $negocio = Negocio::where('id',1)->first();
+
           foreach ($request->clientes_promocion as $key => $value_correo) {
               $email = [$value_correo];
               $subject = 'Promociones';
-              $message = $request->nombre_promocion.','.$descuento->descuento.','.$request->descripcion.','.$numeroAleatorio.','.$fecha_inicial_vigencia.','.$fecha_final_vigencia;
+              $message = $request->nombre_promocion.','.$descuento->descuento.','.$request->descripcion.','.$numeroAleatorio.','.$fecha_inicial_vigencia.','.$fecha_final_vigencia.','.$negocio->facebook.','.$negocio->instagram.','.$negocio->direccion.','.$negocio->telefono;
 
               Mail::to($email)->send( new PromocionEmail($subject,$message ));
           }

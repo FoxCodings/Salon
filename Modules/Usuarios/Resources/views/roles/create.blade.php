@@ -1,4 +1,4 @@
-@extends('layouts.inicio')
+@extends('layouts.index')
 
 @section('content')
 <style media="screen">
@@ -20,6 +20,9 @@ div#collapseusuarios .col-lg-6 {
 }
 .todos, .ninguno{
   margin-left: 15px;
+}
+.checkbox > input:checked ~ span {
+  background-color: #000;
 }
 </style>
 <div class="card card-custom">
@@ -46,7 +49,7 @@ div#collapseusuarios .col-lg-6 {
         <div role="separator" class="dropdown-divider"></div>
 
         <div class="form-group row" style="margin-top: 10px;">
-          @foreach(obtenerModulosActivos() as $values)
+          @foreach(obtenerModulosTodos() as $values)
           <div class="col-lg-4">
             <label><strong>{{$values->get('titulo')}}</strong></label>
             <div class="form-group">

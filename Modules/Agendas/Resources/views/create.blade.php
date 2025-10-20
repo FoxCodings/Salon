@@ -1,11 +1,11 @@
-@extends('layouts.inicio')
+@extends('layouts.index')
 
 @section('content')
 <div class="card card-custom example example-compact">
 <div class="card-header">
 <h3 class="card-title">
 
- @isset($eventos) Editar @else Nuevo @endisset   Evento
+ @isset($eventos) Editar @else Nueva @endisset Cita
 </h3>
 <div class="card-toolbar">
 <div class="example-tools justify-content-center">
@@ -18,23 +18,37 @@
 
 
         <div class="row">
-          <div class="col-md-4">
-              <label for="inputPassword4"  style="font-size:12px;"class="form-label">Titulo: </label>
-              <input type="text" class="form-control" id="titulo" value="@isset($eventos) {{ $eventos->titulo }} @endisset" placeholder="Titulo" required>
+          <div class="col-md-3">
+              <label for="inputPassword4"  style="font-size:12px;"class="form-label">Nombre: </label>
+              <input type="text" class="form-control" id="titulo" value="@isset($eventos) {{ $eventos->titulo }} @endisset" placeholder="Nombre" required>
               <div class="invalid-feedback">
-                Por Favor Ingrese Titulo
+                Por Favor Ingrese Nombre
               </div>
           </div>
 
-          <div class="col-md-4">
-              <label for="inputPassword4"  style="font-size:12px;"class="form-label">Descripción: </label>
-              <textarea id="descripcion" rows="8" cols="80" class="form-control" id="descripcion">@isset($eventos) {{ $eventos->descripcion }} @else  @endisset</textarea>
+
+          <div class="col-md-3">
+              <label for="inputPassword4"  style="font-size:12px;"class="form-label">Servicio: </label>
+              <input type="text" class="form-control" id="servicio" value="@isset($eventos) {{ $eventos->servicio }} @endisset" placeholder="Servicio" required>
               <div class="invalid-feedback">
-                Por Favor Ingrese Descripción
+                Por Favor Ingrese Servicio
               </div>
           </div>
 
-          <div class="col-md-4">
+
+          <div class="col-md-3">
+              <label for="inputPassword4"  style="font-size:12px;"class="form-label">Telefono: </label>
+              <input type="text" class="form-control" id="servicio" value="@isset($eventos) {{ $eventos->telefono }} @endisset" placeholder="Telefono" required>
+              <div class="invalid-feedback">
+                Por Favor Ingrese Telefono
+              </div>
+          </div>
+
+
+
+
+
+          <div class="col-md-3">
               <label for="inputPassword4"  style="font-size:12px;"class="form-label">Fecha: </label>
               @isset($eventos)
               <?php
@@ -51,6 +65,17 @@
               </div>
           </div>
 
+          <div class="row">
+            <div class="col-md-12">
+                <label for="inputPassword4"  style="font-size:12px;"class="form-label">Descripción: </label>
+                <textarea id="descripcion" rows="8" cols="80" class="form-control" id="descripcion">@isset($eventos) {{ $eventos->descripcion }} @else  @endisset</textarea>
+                <div class="invalid-feedback">
+                  Por Favor Ingrese Descripción
+                </div>
+            </div>
+          </div>
+
+
 
         </div>
 
@@ -58,7 +83,7 @@
 </div>
 <div class="card-footer">
 
-  <a href="/agendas" class="btn btn-default">Regresar</a>
+  <a href="/agenda2" class="btn btn-default">Regresar</a>
 
   <a class="btn btn-primary " onclick="guardar()">Guardar</a>
 </div>
@@ -99,10 +124,12 @@ function guardar(){
     @endisset
     var titulo = $('#titulo').val();
     var descripcion = $('#descripcion').val();
+    var servicio = $('#servicio').val();
     var fecha = $('input[name=fecha_defuncion]').val();
 
     formData.append('titulo', titulo);
     formData.append('descripcion', descripcion);
+    formData.append('servicio', servicio);
     formData.append('fecha', fecha);
 
 
@@ -123,7 +150,7 @@ function guardar(){
 
                    type:"POST", //si existe esta variable anillos se va mandar put sino se manda post
 
-                   url:"{{ ( isset($eventos) ) ? '/agendas/update': '/agendas/create' }}", //si existe colores manda la ruta de anillos el id del usario sino va mandar anillos crear
+                   url:"{{ ( isset($eventos) ) ? '/agenda2/update': '/agenda2/create' }}", //si existe colores manda la ruta de anillos el id del usario sino va mandar anillos crear
                    headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')//esto siempre debe ir en los ajax
                    },
@@ -145,7 +172,7 @@ function guardar(){
                             if (result.value == true) {
 
                             }else{
-                              location.href ="/agendas";
+                              location.href ="/agenda2";
                               $('.botoncito').show();
                             }
                         })
@@ -163,7 +190,7 @@ function guardar(){
                             if (result.value == true) {
 
                             }else{
-                              location.href ="/agendas";
+                              location.href ="/agenda2";
                               $('.botoncito').show();
                             }
                         })

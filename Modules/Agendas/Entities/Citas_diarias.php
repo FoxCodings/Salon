@@ -1,0 +1,42 @@
+<?php
+
+namespace Modules\Agendas\Entities;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Citas_diarias extends Model{
+
+  protected $table = 't_calendario_citas';
+  protected $fillable = [
+    'id',
+    'cabina',
+    'horario',
+    'fecha',
+    'id_calendario',
+    'servicio',
+    'empleado',
+    'cliente',
+    'cve_usuario',
+    'activo',
+
+  ];
+
+  // public function obtCreador(){
+  //   return $this->hasOne('\App\User', 'id', 'servicio');
+  // }
+
+  public function obtEmpleado(){
+    return $this->hasOne('\Modules\Empleados\Entities\Empleados', 'id', 'empleado');
+  }
+
+
+  public function obtServicio(){
+    return $this->hasOne('\Modules\Catalogos\Entities\Servicios', 'id', 'servicio');
+  }
+
+
+  public function obtCliente(){
+    return $this->hasOne('\Modules\Clientes\Entities\Clientes', 'id', 'cliente');
+  }
+
+}

@@ -10,6 +10,24 @@
       'PDF' => 'Barryvdh\\DomPDF\\Facade\\Pdf',
     ),
   ),
+  'botman/botman' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'BotMan\\BotMan\\BotManServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'BotMan' => 'BotMan\\BotMan\\Facades\\BotMan',
+    ),
+  ),
+  'botman/driver-facebook' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'BotMan\\Drivers\\Facebook\\Providers\\FacebookServiceProvider',
+    ),
+  ),
   'facade/ignition' => 
   array (
     'providers' => 
@@ -94,6 +112,18 @@
     'aliases' => 
     array (
       'Excel' => 'Maatwebsite\\Excel\\Facades\\Excel',
+    ),
+  ),
+  'milon/barcode' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Milon\\Barcode\\BarcodeServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'DNS1D' => 'Milon\\Barcode\\Facades\\DNS1DFacade',
+      'DNS2D' => 'Milon\\Barcode\\Facades\\DNS2DFacade',
     ),
   ),
   'nesbot/carbon' => 

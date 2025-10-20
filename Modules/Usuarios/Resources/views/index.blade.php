@@ -1,3 +1,4 @@
+
 @extends('layouts.inicio')
 
 @section('content')

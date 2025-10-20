@@ -34,7 +34,7 @@
 
           <div class="col-md-4">
               <label for="inputPassword4"  style="font-size:12px;"class="form-label">Apellido Materno: </label>
-              <input type="text" class="form-control" id="apellido_materno" value="@isset($clientes) {{ $clientes->apellido_materno }} @endisset" placeholder="Apellido Materno" required>
+              <input type="text" class="form-control" id="apellido_materno" value="@isset($clientes) {{ $clientes->apellido_materno }} @endisset" placeholder="Apellido Materno" >
               <div class="invalid-feedback">
                 Por Favor Ingrese Apellido Materno
               </div>
@@ -52,27 +52,41 @@
 
           <div class="col-md-4">
               <label for="inputPassword4"  style="font-size:12px;"class="form-label">Correo Electronico: </label>
-              <input type="text" class="form-control" id="correo_electronico" value="@isset($clientes) {{ $clientes->correo_electronico }} @endisset" placeholder="Correo Electronico" required>
-              <div class="invalid-feedback">
+              <input type="text" class="form-control" id="correo_electronico" value="@isset($clientes) {{ $clientes->correo_electronico }} @endisset" placeholder="Correo Electronico" >
+              <!-- <div class="invalid-feedback">
                 Por Favor Ingrese Correo Electronico
-              </div>
+              </div> -->
           </div>
 
           <div class="col-md-4">
               <label for="inputPassword4"  style="font-size:12px;"class="form-label">Fecha cumpleaños: </label>
-              @isset($clientes)
-              <?php
 
-              list($dia,$mes,$anio) = explode('-',$clientes->cumpleanos);
-              $fecha = $anio.'/'.$mes.'/'.$dia;
+                  @isset($clientes)
+                    @if($clientes->cumpleanos == '')
+                    <input  type="text" name="fecha_cumpleanos"  class="form-control fecha" id="kt_datepicker" autocomplete="off"   placeholder="Fecha cumpleaños" >
+                    <div class="invalid-feedback">
+                      Por Favor Ingrese Fecha
+                    </div>
+                    @else
+                    <?php
+
+                    list($dia,$mes,$anio) = explode('-',$clientes->cumpleanos);
+                    $fecha = $anio.'/'.$mes.'/'.$dia;
 
 
-               ?>
-               @endisset
-              <input  type="text" name="fecha_cumpleanos"  class="form-control fecha" id="kt_datepicker" autocomplete="off" value="@isset($clientes) {{ $fecha }} @endisset"  placeholder="Fecha cumpleaños" required>
-              <div class="invalid-feedback">
-                Por Favor Ingrese Fecha
-              </div>
+                     ?>
+                     <input  type="text" name="fecha_cumpleanos"  class="form-control fecha" id="kt_datepicker" autocomplete="off" value="@isset($clientes) {{ $fecha }} @endisset"  placeholder="Fecha cumpleaños" >
+                     <div class="invalid-feedback">
+                       Por Favor Ingrese Fecha
+                     </div>
+                    @endif
+
+                   @else
+                    <input  type="text" name="fecha_cumpleanos"  class="form-control fecha" id="kt_datepicker" autocomplete="off" value="@isset($clientes) {{ $fecha }} @endisset"  placeholder="Fecha cumpleaños" >
+                    <div class="invalid-feedback">
+                      Por Favor Ingrese Fecha
+                    </div>
+                   @endisset
           </div>
 
 
@@ -144,83 +158,88 @@ function guardar(){
     formData.append('correo_electronico', correo_electronico);
     formData.append('fecha_cumpleanos', fecha_cumpleanos);
 
+    if (nombre == '' ||
+apellido_paterno == '' ||
+telefono == '') {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var form = document.querySelectorAll('.needs-validation')
+      //console.log(form)
+      // Loop over them and prevent submission
+      Array.prototype.slice.call(form)
+        .forEach(function (form) {
+          form.addEventListener('click', function (event) {
+            if (!form.checkValidity()) {
+              event.preventDefault()
+              event.stopPropagation()
+            }
+            form.classList.add('was-validated')
+          }, false)
+        });
+    }else{
+      ///////////////////////////////////////////////////////7
+      $.ajax({
 
+             type:"POST", //si existe esta variable anillos se va mandar put sino se manda post
 
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var form = document.querySelectorAll('.needs-validation')
-    //console.log(form)
-    // Loop over them and prevent submission
-    Array.prototype.slice.call(form)
-      .forEach(function (form) {
-        form.addEventListener('click', function (event) {
-          if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-          }else{
-            ///////////////////////////////////////////////////////7
-            $.ajax({
+             url:"{{ ( isset($clientes) ) ? '/clientes/update': '/clientes/create' }}", //si existe colores manda la ruta de anillos el id del usario sino va mandar anillos crear
+             headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')//esto siempre debe ir en los ajax
+             },
+              data: formData,
+             processData: false,
+             contentType: false,
 
-                   type:"POST", //si existe esta variable anillos se va mandar put sino se manda post
+              success:function(data){
+                if (data.success == 'Se Agrego Satisfactoriamente') {
+                  Swal.fire({
+                    title: "",
+                    text: data.success,
+                    icon: "success",
+                    buttonsStyling: false,
+                    timer: 1500,
+                      showConfirmButton: false,
+                  }).then(function(result) {
 
-                   url:"{{ ( isset($clientes) ) ? '/clientes/update': '/clientes/create' }}", //si existe colores manda la ruta de anillos el id del usario sino va mandar anillos crear
-                   headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')//esto siempre debe ir en los ajax
-                   },
-                    data: formData,
-                   processData: false,
-                   contentType: false,
+                      if (result.value == true) {
 
-                    success:function(data){
-                      if (data.success == 'Se Agrego Satisfactoriamente') {
-                        Swal.fire({
-                          title: "",
-                          text: data.success,
-                          icon: "success",
-                          buttonsStyling: false,
-                          timer: 1500,
-                            showConfirmButton: false,
-                        }).then(function(result) {
-
-                            if (result.value == true) {
-
-                            }else{
-                              location.href ="/clientes";
-                              $('.botoncito').show();
-                            }
-                        })
-
-                      }else if(data.success == 'Ha sido editado con éxito'){
-                        Swal.fire({
-                          title: "",
-                          text: data.success,
-                          icon: "success",
-                          buttonsStyling: false,
-                          timer: 1500,
-                            showConfirmButton: false,
-                        }).then(function(result) {
-
-                            if (result.value == true) {
-
-                            }else{
-                              location.href ="/clientes";
-                              $('.botoncito').show();
-                            }
-                        })
                       }else{
-
+                        location.href ="/clientes";
+                        $('.botoncito').show();
                       }
+                  })
+
+                }else if(data.success == 'Ha sido editado con éxito'){
+                  Swal.fire({
+                    title: "",
+                    text: data.success,
+                    icon: "success",
+                    buttonsStyling: false,
+                    timer: 1500,
+                      showConfirmButton: false,
+                  }).then(function(result) {
+
+                      if (result.value == true) {
+
+                      }else{
+                        location.href ="/clientes";
+                        $('.botoncito').show();
+                      }
+                  })
+                }else{
+
+                }
 
 
 
-                    }
-              });
+              }
+        });
 
-            /////////////////////////////////////////////////////////
-          }
+      /////////////////////////////////////////////////////////
+    }
 
-          form.classList.add('was-validated')
-        }, false)
-      });
+
+
+
 
 
 }

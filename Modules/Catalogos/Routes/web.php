@@ -14,6 +14,36 @@
 Route::prefix('catalogos')->group(function() {
     //Route::get('/', 'CatalogosController@index');
 
+    Route::prefix('servicios')->group(function() {
+    Route::get('/', 'ServiciosController@index');
+    Route::get('/tablaservicios', 'ServiciosController@tablaservicios');
+    Route::get('/create', 'ServiciosController@create');
+    Route::post('/create', 'ServiciosController@store');
+    Route::delete('/borrar', 'ServiciosController@destroy');
+    Route::get('/{id}/edit', 'ServiciosController@edit');
+    Route::post('/update', 'ServiciosController@update');
+    });
+
+    Route::prefix('productos')->group(function() {
+    Route::get('/', 'ProductosController@index');
+    Route::get('/tablaproductos', 'ProductosController@tablaproductos');
+    Route::get('/create', 'ProductosController@create');
+    Route::post('/create', 'ProductosController@store');
+    Route::delete('/borrar', 'ProductosController@destroy');
+    Route::get('/{id}/edit', 'ProductosController@edit');
+    Route::post('/update', 'ProductosController@update');
+    });
+
+
+    Route::prefix('listados')->group(function() {
+    Route::get('/', 'ListadosController@index');
+    Route::post('/GuardarProductos', 'ListadosController@GuardarProductos');
+    Route::post('/TraerProductos', 'ListadosController@TraerProductos');
+    Route::post('/EliminarProductos', 'ListadosController@EliminarProductos');
+    Route::get('/descargarProductos', 'ListadosController@DescargarProductos');
+
+    });
+
 
     Route::prefix('alaciados')->group(function() {
         Route::get('/', 'AlaciadosController@index');

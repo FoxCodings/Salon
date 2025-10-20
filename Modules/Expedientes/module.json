@@ -1,0 +1,17 @@
+{
+    "name": "Expedientes",
+    "alias": "expedientes",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Expedientes\\Providers\\ExpedientesServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": [],
+    "grupo": "1",
+    "activo": "1",
+    "titulo": "Expedientes",
+    "icono": "far fa-folder  text-light mr-5"
+}

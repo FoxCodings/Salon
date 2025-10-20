@@ -1,0 +1,17 @@
+{
+    "name": "Clientes2",
+    "alias": "clientes2",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Clientes2\\Providers\\Clientes2ServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": [],
+    "grupo": "2",
+    "activo": "1",
+    "titulo": "Clientes Spa",
+    "icono": "fas fa-user-friends text-light mr-5"
+}

@@ -1,0 +1,17 @@
+{
+    "name": "Proveedores",
+    "alias": "proveedores",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Proveedores\\Providers\\ProveedoresServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": [],
+    "grupo": "1",
+    "activo": "1",
+    "titulo": "Proveedores Pink",
+    "icono": "fas fa-cart-arrow-down text-light mr-5"
+}

@@ -12,7 +12,6 @@ class Eventos extends Model{
     'titulo',
     'descripcion',
     'fecha',
-    'cliente',
     'modulo',
     'activo',
   ];

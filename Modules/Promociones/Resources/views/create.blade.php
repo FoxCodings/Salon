@@ -20,21 +20,21 @@
 			          <label for="exampleInputPassword1">Nombre de Promoción <small style="color:red;font-size:10px;">*</small></label>
 			          <input type="text" class="form-control" name="nombre_promocion" placeholder="Nombre de Promoción" value="@isset($promocion){{ $promocion->nombre_promocion }}@endisset">
 			        </div>
-			    </div>
-			    <div class="col-md-6 ">
-			        <div class="form-group">
-			          <label for="exampleInputPassword1">Clientes</label>
-				          <select class="form-control select2 select2-hidden-accessible " name="clientes_promocion" multiple="" data-placeholder="Selecciona Clientes" style="width: 100%;" tabindex="-1" aria-hidden="true">
-			              @foreach($clientes as $cliente)
-			              <option class="select2-selection--multiple" value="{{ $cliente->correo_electronico }}">{{ $cliente->nombre }} {{ $cliente->apellido_paterno }} {{ $cliente->apellido_materno }}</option>
-			              @endforeach
-			            </select>
-			        </div>
-			    </div>
-	      	</div>
+				    </div>
+				    <div class="col-md-6 ">
+				        <div class="form-group">
+				          <label for="exampleInputPassword1">Clientes</label>
+					          <select class="form-control select2 select2-hidden-accessible " name="clientes_promocion" multiple="" data-placeholder="Selecciona Clientes" style="width: 100%;" tabindex="-1" aria-hidden="true">
+				              @foreach($clientes as $cliente)
+				              <option class="select2-selection--multiple" value="{{ $cliente->correo_electronico }}">{{ $cliente->nombre }} {{ $cliente->apellido_paterno }} {{ $cliente->apellido_materno }}</option>
+				              @endforeach
+				            </select>
+				        </div>
+				    </div>
+		      	</div>
 
 	      	<div class="row">
-	      		<div class="col-md-4 ">
+		      	<div class="col-md-4 ">
 	      			<div class="form-group">
 	      			<label for="exampleInputPassword1">Descuentos <small style="color:red;font-size:10px;">*</small></label>
 	      			<div class="input-group">
@@ -46,26 +46,22 @@
 										</select>
 		              </div>
 		            </div>
+			    	</div>
 
-		    </div>
-
-		    <div class="col-md-4 ">
-		    		<label>Fecha de Vigencia de Promoción <small style="color:red;font-size:10px;">*</small></label>
-		    		<div class="form-group">
-                <input type="text" class="form-control pull-right" name="reservation" id="kt_datepicker" >
-            </div>
-		    	</div>
+				    <div class="col-md-4 ">
+			    		<label>Fecha de Vigencia de Promoción <small style="color:red;font-size:10px;">*</small></label>
+			    		<div class="form-group">
+		              <input type="text" class="form-control pull-right" name="reservation" id="kt_datepicker" >
+		          </div>
+			    	</div>
 
 
-					<div class="col-md-4 ">
+						<div class="col-md-4 ">
 							<div class="form-group">
 								<label for="exampleInputPassword1">Descripción <small style="color:red;font-size:10px;">* No poner comas en el texto de descripción</small></label>
 								<textarea class="form-control" rows="6" name="descripcion" placeholder="Descripción ...">@isset($promocion){{ $promocion->descripcion }}@endisset</textarea>
 							</div>
 						</div>
-
-
-
 		    </div>
 		    <!-- <p><strong>Estilos de Correo Electronico</strong></p>
 

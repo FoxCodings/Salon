@@ -1,0 +1,17 @@
+{
+    "name": "Nomina2",
+    "alias": "nomina2",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Nomina2\\Providers\\Nomina2ServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": [],
+    "grupo": "2",
+    "activo": "1",
+    "titulo": "Nomina Spa",
+    "icono": "fas fa-receipt text-light mr-5"
+}

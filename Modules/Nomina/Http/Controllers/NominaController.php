@@ -5,16 +5,22 @@ namespace Modules\Nomina\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use \Modules\Nomina\Entities\Nomina;
+use \Modules\Empleados\Entities\Empleados;
+use \Modules\Ventas2\Entities\ServicioVentas;
+use \Modules\Nomina\Entities\Historial;
+use \Modules\Nomina\Entities\Semana;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Storage;
 use Yajra\Datatables\Datatables;
 use \App\Models\User;
+use Barryvdh\DomPDF\Facade as PDF;
 use Auth;
 use \DB;
+
 class NominaController extends Controller
 {
+
   public function __construct()
   {
     $this->middleware('auth');
@@ -48,23 +54,7 @@ class NominaController extends Controller
      */
     public function store(Request $request)
     {
-      try {
-        $nomina = new Nomina();
-        $nomina->nombre = $request->nombre;
-        $nomina->apellido_paterno = $request->apellido_paterno;
-        $nomina->apellido_materno = $request->apellido_materno;
-        $nomina->direccion = $request->direccion;
-        $nomina->telefono = $request->telefono;
-        $nomina->sueldo = $request->sueldo;
-        $nomina->modulo = 1;
-        $nomina->cve_usuario = Auth::user()->id;
-        $nomina->save();
-        return response()->json(['success'=>'Se Agrego Satisfactoriamente']);
-
-      } catch (\Exception $e) {
-        dd($e->getMessage());
-      }
-
+        //
     }
 
     /**
@@ -74,7 +64,218 @@ class NominaController extends Controller
      */
     public function show($id)
     {
-        return view('nomina::show');
+        $data['empleados'] = Empleados::find($id);
+        //$data['servicios'] = ServicioVentas::where([['activo',1],['id_cliente',$id]])->get();
+        return view('nomina::show')->with($data);
+    }
+
+    public function historial($id)
+    {
+        $data['empleados'] = Empleados::find($id);
+        //$data['servicios'] = ServicioVentas::where([['activo',1],['id_cliente',$id]])->get();
+        return view('nomina::historial')->with($data);
+    }
+
+    public function BuscarPagos(Request $request){
+      //dd($request->all());
+      list($dia,$mes,$anio)=explode('/',$request->fecha_inicio);
+      $fecha_inicio = $anio.'-'.$mes.'-'.$dia.' 00:00:00';
+
+      list($dia2,$mes2,$anio2)=explode('/',$request->fecha_fin);
+      $fecha_fin = $anio2.'-'.$mes2.'-'.$dia2.' 23:59:59';
+
+
+
+      if ($request->semana == 1) {
+        $bienes_query = ("
+
+          SELECT
+          empleados.semana_1 as semana,
+          t_cat_ventas.*
+           FROM empleados
+          INNER JOIN t_cat_ventas ON t_cat_ventas.id_empleado = empleados.id
+          WHERE  t_cat_ventas.id_empleado = $request->id AND empleados.activo = 1 and empleados.modulo = 1 AND t_cat_ventas.created_at BETWEEN '".$fecha_inicio."' AND '".$fecha_fin."'
+         ");
+
+         $bienes= DB::select($bienes_query);
+
+      }else if($request->semana == 2){
+        $bienes_query = ("
+
+          SELECT
+          empleados.semana_2 as semana,
+          t_cat_ventas.*
+           FROM empleados
+          INNER JOIN t_cat_ventas ON t_cat_ventas.id_empleado = empleados.id
+          WHERE  t_cat_ventas.id_empleado = $request->id AND empleados.activo = 1 and empleados.modulo = 1 AND t_cat_ventas.created_at BETWEEN '".$fecha_inicio."' AND '".$fecha_fin."'
+         ");
+         $bienes= DB::select($bienes_query);
+      }else if($request->semana == 3){
+        $bienes_query = ("
+
+          SELECT
+          empleados.semana_3 as semana,
+          t_cat_ventas.*
+           FROM empleados
+          INNER JOIN t_cat_ventas ON t_cat_ventas.id_empleado = empleados.id
+          WHERE  t_cat_ventas.id_empleado = $request->id AND empleados.activo = 1 and empleados.modulo = 1 AND t_cat_ventas.created_at BETWEEN '".$fecha_inicio."' AND '".$fecha_fin."'
+         ");
+         $bienes= DB::select($bienes_query);
+      }else if($request->semana == 4){
+        $bienes_query = ("
+
+          SELECT
+          empleados.semana_4 as semana,
+          t_cat_ventas.*
+           FROM empleados
+          INNER JOIN t_cat_ventas ON t_cat_ventas.id_empleado = empleados.id
+          WHERE  t_cat_ventas.id_empleado = $request->id AND empleados.activo = 1 and empleados.modulo = 1 AND t_cat_ventas.created_at BETWEEN '".$fecha_inicio."' AND '".$fecha_fin."'
+         ");
+         $bienes= DB::select($bienes_query);
+      }
+
+      return $bienes;
+    }
+
+    public function TrerComisionesExtras(Request $request){
+      list($dia,$mes,$anio)=explode('/',$request->fecha_inicio);
+      $fecha_inicio = $anio.'-'.$mes.'-'.$dia.' 00:00:00';
+
+      list($dia2,$mes2,$anio2)=explode('/',$request->fecha_fin);
+      $fecha_fin = $anio2.'-'.$mes2.'-'.$dia2.' 23:59:59';
+
+
+
+      if ($request->semana == 1) {
+        $bienes_query = ("
+
+          SELECT
+          empleados.semana_1 as semana,
+          t_cat_ventas.servicio,
+          t_cat_ventas.comision_servicio,
+          t_cat_ventas.created_at
+           FROM empleados
+          INNER JOIN t_cat_ventas ON t_cat_ventas.id_empleado = empleados.id
+          WHERE  t_cat_ventas.id_empleado = $request->id AND empleados.activo = 1 and empleados.modulo = 1 AND t_cat_ventas.created_at BETWEEN '".$fecha_inicio."' AND '".$fecha_fin."'
+         ");
+         $bienes= DB::select($bienes_query);
+
+      }else if($request->semana == 2){
+        $bienes_query = ("
+
+          SELECT
+          empleados.semana_2 as semana,
+          t_cat_ventas.servicio,
+          t_cat_ventas.comision_servicio,
+          t_cat_ventas.created_at
+           FROM empleados
+          INNER JOIN t_cat_ventas ON t_cat_ventas.id_empleado = empleados.id
+          WHERE  t_cat_ventas.id_empleado = $request->id AND empleados.activo = 1 and empleados.modulo = 1 AND t_cat_ventas.created_at BETWEEN '".$fecha_inicio."' AND '".$fecha_fin."'
+         ");
+         $bienes= DB::select($bienes_query);
+      }else if($request->semana == 3){
+        $bienes_query = ("
+
+          SELECT
+          empleados.semana_3 as semana,
+          t_cat_ventas.servicio,
+          t_cat_ventas.comision_servicio,
+          t_cat_ventas.created_at
+           FROM empleados
+          INNER JOIN t_cat_ventas ON t_cat_ventas.id_empleado = empleados.id
+          WHERE  t_cat_ventas.id_empleado = $request->id AND empleados.activo = 1 and empleados.modulo = 1 AND t_cat_ventas.created_at BETWEEN '".$fecha_inicio."' AND '".$fecha_fin."'
+         ");
+         $bienes= DB::select($bienes_query);
+      }else if($request->semana == 4){
+        $bienes_query = ("
+
+          SELECT
+          empleados.semana_4 as semana,
+          t_cat_ventas.servicio,
+          t_cat_ventas.comision_servicio,
+          t_cat_ventas.created_at
+           FROM empleados
+          INNER JOIN t_cat_ventas ON t_cat_ventas.id_empleado = empleados.id
+          WHERE  t_cat_ventas.id_empleado = $request->id AND empleados.activo = 1 and empleados.modulo = 1 AND t_cat_ventas.created_at BETWEEN '".$fecha_inicio."' AND '".$fecha_fin."'
+         ");
+         $bienes= DB::select($bienes_query);
+      }
+      //dd($bienes);
+      return $bienes;
+    }
+
+    public function crearHistorial(Request $request){
+      try {
+        //dd($request->all());
+        list($dia,$mes,$anio)=explode('/', $request->fecha_inicio);
+        $fecha = $anio.'-'.$mes.'-'.$dia;
+        list($dia2,$mes2,$anio2)=explode('/', $request->fecha_fin);
+        $fecha2 = $anio2.'-'.$mes2.'-'.$dia2;
+
+        $semana = new Semana();
+        $semana->id_empleado = $request->id;
+        $semana->fecha_inicio = $fecha;
+        $semana->fecha_fin = $fecha2;
+        $semana->semana = $request->semana;
+        $semana->cve_usuario = Auth::user()->id;
+        $semana->save();
+
+        if (isset($request->arrayCosas)) {
+          foreach ($request->arrayCosas as $key => $value) {
+
+            list($dia,$mes,$anio)=explode('/',$value['fecha_inicio']);
+            $fecha = $anio.'-'.$mes.'-'.$dia;
+            list($dia2,$mes2,$anio2)=explode('/',$value['fecha_fin']);
+            $fecha2 = $anio2.'-'.$mes2.'-'.$dia2;
+
+            $historial = new Historial();
+            $historial->id_empleado = $request->id;
+            $historial->id_semana = $semana->id;
+            $historial->semana = $value['semana'];
+            $historial->fecha_inicio = $fecha;
+            $historial->fecha_fin = $fecha2;
+            $historial->fecha_comision = $value['fecha'];
+            $historial->comision = $value['comision'];
+            $historial->servicio = $value['servicio'];
+            $historial->total_semana = $value['total_semana'];
+            $historial->total_comision = $value['total_comision'];
+            $historial->cve_usuario = Auth::user()->id;
+            $historial->save();
+            ///dd($request->arrayComisiones);
+            if (isset($request->arrayComisiones)) {
+              foreach ($request->arrayComisiones as $key => $valuesyt) {
+                $historial = new Historial();
+                $historial->id_empleado = $request->id;
+                $historial->id_semana = $semana->id;
+                $historial->semana = $value['semana'];
+                $historial->fecha_inicio = $fecha;
+                $historial->fecha_fin = $fecha2;
+                $historial->fecha_comision = $valuesyt['fecha'];
+                $historial->comision = $valuesyt['comision_extra'];
+                $historial->servicio = $valuesyt['servicio'];
+                $historial->total_semana = $value['total_semana'];
+                $historial->total_comision = $value['total_comision'];
+                $historial->cve_usuario = Auth::user()->id;
+                $historial->save();
+              }
+            }
+
+
+
+
+          }
+        }
+
+
+
+
+
+
+        return response()->json(['success'=>'Se Agrego Satisfactoriamente']);
+      } catch (\Exception $e) {
+        dd($e->getMessage());
+      }
+
     }
 
     /**
@@ -82,10 +283,14 @@ class NominaController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function edit($id)
+    public function pagos($id)
     {
-        $data['nominas'] = Nomina::find($id);
-        return view('nomina::create')->with($data);
+      //dd($id);
+        $h = Historial::where([['id_semana',$id],['activo',1]])->first();
+        //dd($h);
+        $data['historial'] = Historial::where([['id_semana',$id],['activo',1]])->get();
+        $data['id'] = $h->id_empleado;
+        return view('nomina::pagos')->with($data);
     }
 
     /**
@@ -94,27 +299,9 @@ class NominaController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-      try {
-
-
-        $nomina = Nomina::find($request->id);
-        $nomina->nombre = $request->nombre;
-        $nomina->apellido_paterno = $request->apellido_paterno;
-        $nomina->apellido_materno = $request->apellido_materno;
-        $nomina->direccion = $request->direccion;
-        $nomina->telefono = $request->telefono;
-        $nomina->sueldo = $request->sueldo;
-        $nomina->cve_usuario = Auth::user()->id;
-        $nomina->save();
-
-        return response()->json(['success'=>'Ha sido editado con éxito']);
-
-      } catch (\Exception $e) {
-        dd($e->getMessage());
-      }
-
+        //
     }
 
     /**
@@ -122,66 +309,178 @@ class NominaController extends Controller
      * @param int $id
      * @return Renderable
      */
-     public function destroy(Request $request)
-     {
-       try {
-         $usuario = Nomina::find($request->id);
-         $usuario->activo = 0;
-         $usuario->save();
-         return response()->json(['success'=>'Eliminado exitosamente']);
-       } catch (\Exception $e) {
-         dd($e->getMessage());
-       }
-     }
+    public function destroy($id)
+    {
+        //
+    }
 
     public function tablanominas(){
       setlocale(LC_TIME, 'es_ES');
       \DB::statement("SET lc_time_names = 'es_ES'");
-      $registros = Nomina::where([['activo', 1],['modulo',1]])->get(); //user es una entidad que se trae desde la app
+      $registros = Empleados::where([['activo', 1],['modulo',1],['id','!=',1]])->get();
       $datatable = DataTables::of($registros)
       ->make(true);
       //Cueri
       $data = $datatable->getData();
-      foreach ($data->data as $key => $value) { //el array acciones se constuye en el helpers dropdown - helpers esta con bootsrap
+      foreach ($data->data as $key => $value) {
 
-        // if(Auth::user()->can(['editar usuario','eliminar usuario'])){
-        //     $acciones = [
-        //       "Editar" => [
-        //         "icon" => "edit blue",
-        //         "href" => "/usuarios/$value->id/edit" //esta ruta esta en el archivo web
-        //       ],
-        //       "Eliminar" => [
-        //         "icon" => "edit blue",
-        //         "onclick" => "eliminar($value->id)"
-        //       ],
-        //       "Login as" => [ "onclick" => "as('$value->id')" ],
-        //     ];
-        //   }else if(Auth::user()->can('eliminar usuario')){
-        //     $acciones = [
-        //       "Eliminar" => [
-        //         "icon" => "edit blue",
-        //         "onclick" => "eliminar($value->id)"
-        //       ],
-        //     ];
-        //   }else if(Auth::user()->can('editar usuario')){
-        //     $acciones = [
-        //       "Editar" => [
-        //         "icon" => "edit blue",
-        //         "href" => "/usuarios/$value->id/edit" //esta ruta esta en el archivo web
-        //       ],
-        //     ];
-        //   }else{
+
             $acciones = [
-              "Editar" => [
+              "Pago" => [
                 "icon" => "edit blue",
-                "href" => "/nomina/$value->id/edit" //esta ruta esta en el archivo web
+                "href" => "/nomina/$value->id/show"
               ],
-              "Eliminar" => [
+              "Historial" => [
                 "icon" => "edit blue",
-                "onclick" => "eliminar($value->id)"
+                "href" => "/nomina/$value->id/historial"
               ],
             ];
-          // }
+
+
+
+      $value->acciones = generarDropdown($acciones);
+      }
+      $datatable->setData($data);
+      return $datatable;
+    }
+
+    public function tablahistorial(Request $request){
+      //dd($request->id);
+      setlocale(LC_TIME, 'es_ES');
+      \DB::statement("SET lc_time_names = 'es_ES'");
+      $registros = Semana::where([['activo', 1],['id_empleado',$request->id]])->get();
+      $datatable = DataTables::of($registros)
+      ->editColumn('fecha_inicio', function ($registros) {
+
+
+                list($anio,$mes,$dia) = explode('-',$registros->fecha_inicio);
+
+                if ($mes == 1) {
+                  $mes_fecha = 'ENERO';
+                  $fecha_formato = $dia.' DE '.$mes_fecha.' DEL '.$anio;
+
+                }elseif($mes == 2){
+                  $mes_fecha = 'FEBRERO';
+                  $fecha_formato = $dia.' DE '.$mes_fecha.' DEL '.$anio;
+
+                }elseif($mes == 3){
+                  $mes_fecha = 'MARZO';
+                  $fecha_formato = $dia.' DE '.$mes_fecha.' DEL '.$anio;
+
+                }elseif($mes == 4){
+                  $mes_fecha = 'ABRIL';
+                  $fecha_formato = $dia.' DE '.$mes_fecha.' DEL '.$anio;
+
+                }elseif($mes == 5){
+                  $mes_fecha = 'MAYO';
+                  $fecha_formato = $dia.' DE '.$mes_fecha.' DEL '.$anio;
+
+                }elseif($mes == 6){
+                  $mes_fecha = 'JUNIO';
+                  $fecha_formato = $dia.' DE '.$mes_fecha.' DEL '.$anio;
+
+                }elseif($mes == 7){
+                  $mes_fecha = 'JULIO';
+                  $fecha_formato = $dia.' DE '.$mes_fecha.' DEL '.$anio;
+
+                }elseif($mes == 8){
+                  $mes_fecha = 'AGOSTO';
+                  $fecha_formato = $dia.' DE '.$mes_fecha.' DEL '.$anio;
+
+                }elseif($mes == 9){
+                  $mes_fecha = 'SEPTIEMBRE';
+                  $fecha_formato = $dia.' DE '.$mes_fecha.' DEL '.$anio;
+
+                }elseif($mes == 10){
+                  $mes_fecha = 'OCTUBRE';
+                  $fecha_formato = $dia.' DE '.$mes_fecha.' DEL '.$anio;
+
+                }elseif($mes == 11){
+                  $mes_fecha = 'NOVIEMBRE';
+                  $fecha_formato = $dia.' DE '.$mes_fecha.' DEL '.$anio;
+
+                }elseif($mes == 12){
+                  $mes_fecha = 'DICIEMBRE';
+                  $fecha_formato = $dia.' DE '.$mes_fecha.' DEL '.$anio;
+                }
+
+
+
+              return $fecha_formato;
+
+      })
+      ->editColumn('fecha_fin', function ($registros) {
+
+
+        list($anio,$mes,$dia) = explode('-',$registros->fecha_fin);
+
+        if ($mes == 1) {
+          $mes_fecha = 'ENERO';
+          $fecha_formato = $dia.' DE '.$mes_fecha.' DEL '.$anio;
+
+        }elseif($mes == 2){
+          $mes_fecha = 'FEBRERO';
+          $fecha_formato = $dia.' DE '.$mes_fecha.' DEL '.$anio;
+
+        }elseif($mes == 3){
+          $mes_fecha = 'MARZO';
+          $fecha_formato = $dia.' DE '.$mes_fecha.' DEL '.$anio;
+
+        }elseif($mes == 4){
+          $mes_fecha = 'ABRIL';
+          $fecha_formato = $dia.' DE '.$mes_fecha.' DEL '.$anio;
+
+        }elseif($mes == 5){
+          $mes_fecha = 'MAYO';
+          $fecha_formato = $dia.' DE '.$mes_fecha.' DEL '.$anio;
+
+        }elseif($mes == 6){
+          $mes_fecha = 'JUNIO';
+          $fecha_formato = $dia.' DE '.$mes_fecha.' DEL '.$anio;
+
+        }elseif($mes == 7){
+          $mes_fecha = 'JULIO';
+          $fecha_formato = $dia.' DE '.$mes_fecha.' DEL '.$anio;
+
+        }elseif($mes == 8){
+          $mes_fecha = 'AGOSTO';
+          $fecha_formato = $dia.' DE '.$mes_fecha.' DEL '.$anio;
+
+        }elseif($mes == 9){
+          $mes_fecha = 'SEPTIEMBRE';
+          $fecha_formato = $dia.' DE '.$mes_fecha.' DEL '.$anio;
+
+        }elseif($mes == 10){
+          $mes_fecha = 'OCTUBRE';
+          $fecha_formato = $dia.' DE '.$mes_fecha.' DEL '.$anio;
+
+        }elseif($mes == 11){
+          $mes_fecha = 'NOVIEMBRE';
+          $fecha_formato = $dia.' DE '.$mes_fecha.' DEL '.$anio;
+
+        }elseif($mes == 12){
+          $mes_fecha = 'DICIEMBRE';
+          $fecha_formato = $dia.' DE '.$mes_fecha.' DEL '.$anio;
+        }
+
+
+
+      return $fecha_formato;
+
+      })
+      ->make(true);
+      //Cueri
+      $data = $datatable->getData();
+      foreach ($data->data as $key => $value) {
+
+
+            $acciones = [
+              "Ver Pago" => [
+                "icon" => "edit blue",
+                "href" => "/nomina/$value->id/pagos"
+              ],
+            ];
+
 
 
       $value->acciones = generarDropdown($acciones);

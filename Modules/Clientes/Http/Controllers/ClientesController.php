@@ -5,8 +5,8 @@ namespace Modules\Clientes\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use \Modules\Clientes\Entities\Clientes;
-use \Modules\Agendas\Entities\Eventos;
+use \Modules\Clientes2\Entities\Clientes;
+use \Modules\Agenda2\Entities\Eventos;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Storage;
@@ -17,7 +17,6 @@ use \DB;
 
 class ClientesController extends Controller
 {
-
   public function __construct()
   {
     $this->middleware('auth');
@@ -53,56 +52,72 @@ class ClientesController extends Controller
     {
       try {
 
-        list($dia,$mes,$anio)=explode('/',$request->fecha_cumpleanos);
-        $fecha = $anio.'-'.$mes.'-'.$dia;
+        //dd($request->all());
 
-        $cliente = new Clientes();
-        $cliente->nombre = $request->nombre;
-        $cliente->apellido_paterno = $request->apellido_paterno;
-        $cliente->apellido_materno = $request->apellido_materno;
-        $cliente->telefono = $request->telefono;
-        $cliente->correo_electronico = $request->correo_electronico;
-        $cliente->cumpleanos = $fecha;
-        $cliente->modulo = 1;
-        $cliente->cve_usuario = Auth::user()->id;
-        $cliente->save();
-
-
-
-
-        $clientes = Clientes::where([['activo',1],['modulo',1]])->get();
-        $fechas = [];
-        $nombre = [];
-        foreach ($clientes as $key => $value) {
-          //dd($value['cumpleanos']);
-
-          list($anio,$mes,$dia)=explode('-',$value['cumpleanos']);
-
-          $nombres = $value['nombre'].' '.$value['apellido_paterno'].' '.$value['apellido_materno'];
-
-          $fechita = date('Y').'-'.$mes.'-'.$dia;
-
-
-          $eventos_existe = Eventos::where([['activo',1],['descripcion',$nombres]])->first();
-
-          if (isset($eventos_existe)) {
-            // code...
-          }else{
+        if ($request->fecha_cumpleanos == null) {
+          $cliente = new Clientes();
+          $cliente->nombre = $request->nombre;
+          $cliente->apellido_paterno = $request->apellido_paterno;
+          $cliente->apellido_materno = $request->apellido_materno;
+          $cliente->telefono = $request->telefono;
+          $cliente->correo_electronico = $request->correo_electronico;
+          $cliente->modulo = 1;
+          $cliente->cve_usuario = Auth::user()->id;
+          $cliente->save();
+        }else{
+          list($dia,$mes,$anio)=explode('/',$request->fecha_cumpleanos);
+          $fecha = $anio.'-'.$mes.'-'.$dia;
+          //dd($fecha);
+          $cliente = new Clientes();
+          $cliente->nombre = $request->nombre;
+          $cliente->apellido_paterno = $request->apellido_paterno;
+          $cliente->apellido_materno = $request->apellido_materno;
+          $cliente->telefono = $request->telefono;
+          $cliente->correo_electronico = $request->correo_electronico;
+          $cliente->cumpleanos = $fecha;
+          $cliente->modulo = 1;
+          $cliente->cve_usuario = Auth::user()->id;
+          $cliente->save();
 
 
 
-            $evento = new Eventos();
-            $evento->titulo = 'Cumpleaños';
-            $evento->descripcion = $nombres;
-            $evento->fecha = $fechita;
-            $evento->cliente = $value['id'];
-            $evento->modulo = 1;
-            $evento->cve_usuario = Auth::user()->id;
-            $evento->save();
-          }
+          //
+          // $clientes = Clientes::where([['activo',1],['modulo',1]])->get();
+          // $fechas = [];
+          // $nombre = [];
+          // foreach ($clientes as $key => $value) {
+          //   //dd($value['cumpleanos']);
+          //
+          //   list($anio,$mes,$dia)=explode('-',$value['cumpleanos']);
+          //
+          //   $nombres = $value['nombre'].' '.$value['apellido_paterno'].' '.$value['apellido_materno'];
+          //
+          //   $fechita = date('Y').'-'.$mes.'-'.$dia;
+          //
+          //
+          //   $eventos_existe = Eventos::where([['activo',1],['descripcion',$nombres]])->first();
+          //
+          //   if (isset($eventos_existe)) {
+          //     // code...
+          //   }else{
+          //     $evento = new Eventos();
+          //     $evento->titulo = 'Cumpleaños';
+          //     $evento->descripcion = $nombres;
+          //     $evento->fecha = $fechita;
+          //     $evento->cliente = $value['id'];
+          //     $evento->modulo = 1;
+          //     $evento->cve_usuario = Auth::user()->id;
+          //     $evento->save();
+          //   }
+          //
+          //
+          // }
 
 
         }
+
+
+
 
 
 
@@ -146,18 +161,69 @@ class ClientesController extends Controller
     {
       try {
 
-        list($dia,$mes,$anio)=explode('/',$request->fecha_cumpleanos);
-        $fecha = $anio.'-'.$mes.'-'.$dia;
+        if ($request->fecha_cumpleanos == null) {
+          $cliente = Clientes::find($request->id);
+          $cliente->nombre = $request->nombre;
+          $cliente->apellido_paterno = $request->apellido_paterno;
+          $cliente->apellido_materno = $request->apellido_materno;
+          $cliente->telefono = $request->telefono;
+          $cliente->correo_electronico = $request->correo_electronico;
+          $cliente->modulo = 1;
+          $cliente->cve_usuario = Auth::user()->id;
+          $cliente->save();
+        }else{
+          list($dia,$mes,$anio)=explode('/',$request->fecha_cumpleanos);
+          $fecha = $anio.'-'.$mes.'-'.$dia;
 
-        $cliente = Clientes::find($request->id);
-        $cliente->nombre = $request->nombre;
-        $cliente->apellido_paterno = $request->apellido_paterno;
-        $cliente->apellido_materno = $request->apellido_materno;
-        $cliente->telefono = $request->telefono;
-        $cliente->correo_electronico = $request->correo_electronico;
-        $cliente->cumpleanos = $fecha;
-        $cliente->cve_usuario = Auth::user()->id;
-        $cliente->save();
+          $cliente = Clientes::find($request->id);
+          $cliente->nombre = $request->nombre;
+          $cliente->apellido_paterno = $request->apellido_paterno;
+          $cliente->apellido_materno = $request->apellido_materno;
+          $cliente->telefono = $request->telefono;
+          $cliente->correo_electronico = $request->correo_electronico;
+          $cliente->cumpleanos = $fecha;
+          $cliente->cve_usuario = Auth::user()->id;
+          $cliente->save();
+          /////////////////////////////////////////////////////////////////
+          $clientes = Clientes::where([['activo',1],['modulo',2]])->get();
+          $fechas = [];
+          $nombre = [];
+          foreach ($clientes as $key => $value) {
+            //dd($value['cumpleanos']);
+
+            list($anio,$mes,$dia)=explode('-',$value['cumpleanos']);
+
+            $nombres = $value['nombre'].' '.$value['apellido_paterno'].' '.$value['apellido_materno'];
+
+            $fechita = date('Y').'-'.$mes.'-'.$dia;
+
+
+            $eventos_existe = Eventos::where([['activo',1],['descripcion',$nombres]])->first();
+
+            if (isset($eventos_existe)) {
+              $evento = Eventos::find($eventos_existe->id);
+              $evento->fecha = $fechita;
+              $evento->cve_usuario = Auth::user()->id;
+              $evento->save();
+            }else{
+
+
+
+              $evento = new Eventos();
+              $evento->titulo = 'Cumpleaños';
+              $evento->descripcion = $nombres;
+              $evento->fecha = $fechita;
+              $evento->cliente = $value['id'];
+              $evento->modulo = 1;
+              $evento->cve_usuario = Auth::user()->id;
+              $evento->save();
+            }
+
+
+          }
+        }
+
+
 
         return response()->json(['success'=>'Ha sido editado con éxito']);
 

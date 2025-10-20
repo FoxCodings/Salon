@@ -63,4 +63,26 @@ Route::prefix('usuarios')->group(function() {
 
     });
 
+
+    Route::prefix('negocios')->group(function() {
+        Route::get('/', 'NegocioController@index');
+        Route::get('/tablanegocios', 'NegocioController@tablanegocios');
+        Route::get('/create', 'NegocioController@create');
+        Route::post('/create', 'NegocioController@store');
+        Route::delete('/borrar', 'NegocioController@destroy');
+        Route::get('/{id}/edit', 'NegocioController@edit');
+        Route::post('/update', 'NegocioController@update');
+    });
+
+    Route::prefix('archivos')->group(function() {
+        Route::get('/', 'ArchivosController@index');
+        Route::get('/tablaarchivo', 'ArchivosController@tablaarchivo');
+        Route::get('/create', 'ArchivosController@create');
+        Route::post('/create', 'ArchivosController@store');
+        Route::delete('/borrar', 'ArchivosController@destroy');
+        Route::get('/{id}/edit', 'ArchivosController@edit');
+        Route::post('/update', 'ArchivosController@update');
+        Route::get('/documento/{id}', 'ArchivosController@documento');
+    });
+
 });

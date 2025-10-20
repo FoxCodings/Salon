@@ -6,27 +6,24 @@
 <h3 class="card-title">
   Promociones
 </h3>
-<div class="card-toolbar">
-
-  <div class="dropdown dropleft">
-    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Nuevo
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="/promociones/create">Promoción</a>
-        <a class="dropdown-item" href="/promociones/createcumpleanos">Promoción Cumpleaños</a>
-    </div>
-</div>
-
-
-
+    <div class="card-toolbar">
+        <div class="dropdown dropleft">
+          <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Nuevo
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="/promociones/create">Promoción</a>
+              <a class="dropdown-item" href="/promociones/createcumpleanos">Promoción Cumpleaños</a>
+          </div>
+      </div>
     </div>
 </div>
 <div class="card-body">
-<table class="table table-bordered table-checkable" id="kt_datatable">
+  <div class="table-responsive">
+    <table class="table table-bordered table-checkable" id="kt_datatable">
   <thead>
     <tr>
-      <th>Nombre</th>
+      <th>Titulo</th>
       <th>Descuento %</th>
       <th>Fecha de Vigencia</th>
       <th>N° Promoción</th>
@@ -36,6 +33,7 @@
     </thead>
    <tbody></tbody>
 </table>
+  </div>
 </div>
 </div>
 <script type="text/javascript">

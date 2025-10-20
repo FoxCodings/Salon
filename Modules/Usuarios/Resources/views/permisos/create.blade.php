@@ -1,4 +1,4 @@
-@extends('layouts.inicio')
+@extends('layouts.index')
 
 @section('content')
 <style media="screen">
@@ -50,7 +50,7 @@ div#collapseusuarios .col-lg-6 {
 
           <div class="col-md-4">
             <label>Modulos</label>
-              @foreach(obtenerModulosActivos() as $values)
+              @foreach(obtenerModulosTodos() as $values)
               <div class="radio-inline">
                 <label class="radio" >
                     <input type="radio" name="page"  value="{{ $values->get('alias') }}" @isset($permisos)   @if($permisos->modulo == $values->get('alias')) checked  @endif  @endisset>

@@ -35,7 +35,12 @@ class UsuariosController extends Controller
      */
     public function index()
     {
+      if (Auth::user()->modulo == 1 || Auth::user()->modulo == 0) {
         return view('usuarios::index');
+      }else if(Auth::user()->modulo == 2){
+        return view('usuarios::index2');
+      }
+
     }
 
     /**
@@ -45,7 +50,7 @@ class UsuariosController extends Controller
     public function create()
     {
 
-      $data['roles'] = Roles::all();
+      $data['roles'] = Roles::where('id','!=',3)->get();
 
       return view('usuarios::create')->with($data);
     }
@@ -236,7 +241,7 @@ class UsuariosController extends Controller
     public function tablausuarios(){
       setlocale(LC_TIME, 'es_ES');
       \DB::statement("SET lc_time_names = 'es_ES'");
-      $registros = User::where('activo', 1); //user es una entidad que se trae desde la app
+      $registros = User::where([['activo', 1],['tipo_usuario','!=',3]]); //user es una entidad que se trae desde la app
       $datatable = DataTables::of($registros)
       ->editColumn('tipo_usuario', function ($registros) {
         return $registros->obtenerUser->name;//relacion
