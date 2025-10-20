@@ -1,0 +1,15 @@
+{
+    "Usuarios": true,
+    "Formulario": true,
+    "Incidencias": true,
+    "Chat": true,
+    "Catalogos": true,
+    "Agendas": true,
+    "Promociones": true,
+    "Clientes": true,
+    "Ventas": true,
+    "Reportes": true,
+    "Nomina": true,
+    "Agenda2": true,
+    "Empleados": true
+}

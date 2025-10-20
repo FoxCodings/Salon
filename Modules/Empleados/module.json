@@ -1,0 +1,16 @@
+{
+    "name": "Empleados",
+    "alias": "empleados",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Empleados\\Providers\\EmpleadosServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": [],
+    "grupo": "1",
+    "titulo": "Empleados",
+    "icono": "fas fa-users text-primary mr-5"
+}

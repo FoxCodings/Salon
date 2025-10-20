@@ -1,0 +1,16 @@
+{
+    "name": "Promociones",
+    "alias": "promociones",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Promociones\\Providers\\PromocionesServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": [],
+    "grupo": "1",
+    "titulo": "Promociones",
+    "icono": "fas fa-paper-plane  text-primary mr-5"
+}

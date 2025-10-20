@@ -1,0 +1,16 @@
+{
+    "name": "Agendas",
+    "alias": "agendas",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Agendas\\Providers\\AgendasServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": [],
+    "grupo": "1",
+    "titulo": "Agenda",
+    "icono": "far fa-calendar-alt text-primary mr-5"
+}

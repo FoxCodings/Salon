@@ -1,0 +1,74 @@
+{
+    "name": "Catalogos",
+    "alias": "catalogos",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Catalogos\\Providers\\CatalogosServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": [],
+    "grupo": "1",
+    "titulo": "Catalogos",
+    "icono": "far fa-folder-open  text-primary mr-5",
+    "contenido": {
+      "Tratamientos": {
+          "enlace": "/catalogos/alaciados",
+          "icono": "fas fa-table",
+          "permises": [
+
+          ]
+      },
+        "Pestañas y Cejas": {
+            "enlace": "/catalogos/pestanas",
+            "icono": "fas fa-table",
+            "permises": [
+
+            ]
+        },
+        "Cabello": {
+            "enlace": "/catalogos/cabellos",
+            "icono": "fas fa-table",
+            "permises": [
+
+            ]
+        },
+        "Peinado Express": {
+            "enlace": "/catalogos/peinados",
+            "icono": "fas fa-table",
+            "permises": [
+
+            ]
+        },
+        "Shellac": {
+            "enlace": "/catalogos/shellacs",
+            "icono": "fas fa-table",
+            "permises": [
+
+            ]
+        },
+        "Servicios Adicionales": {
+            "enlace": "/catalogos/servicios_a",
+            "icono": "fas fa-table",
+            "permises": [
+
+            ]
+        },
+        "Fast Nails": {
+            "enlace": "/catalogos/fasts",
+            "icono": "fas fa-table",
+            "permises": [
+
+            ]
+        },
+        "Servicios Especiales Express": {
+            "enlace": "/catalogos/servicios_ex",
+            "icono": "fas fa-table",
+            "permises": [
+
+            ]
+        }
+    }
+}

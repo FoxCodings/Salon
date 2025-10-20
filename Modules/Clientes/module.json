@@ -1,0 +1,16 @@
+{
+    "name": "Clientes",
+    "alias": "clientes",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Clientes\\Providers\\ClientesServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": [],
+    "grupo": "1",
+    "titulo": "Clientes",
+    "icono": "far fa-address-card text-primary mr-5"
+}

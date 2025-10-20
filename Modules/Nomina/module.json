@@ -1,0 +1,16 @@
+{
+    "name": "Nomina",
+    "alias": "nomina",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Nomina\\Providers\\NominaServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": [],
+    "grupo": "1",
+    "titulo": "Nomina",
+    "icono": "far fa-file-alt text-primary mr-5"
+}
