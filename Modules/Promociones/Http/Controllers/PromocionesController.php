@@ -99,7 +99,7 @@ class PromocionesController extends Controller
         }
         //$data['clientes'] = [['correo_electronico' => $cliente_id, 'nombre' => $cliente_nombre]];
 
-        $data['clientes'] = Cliente_Cumpleano::where([['activo',1],['modulo',1]])->get();
+        $data['clientes'] = Clientes::where([['activo',1],['modulo',1]])->get();
         $data['descuentos'] = Descuentos::where('activo',1)->get();
         //dd($data);
         return view('promociones::createcumpleanos')->with($data);
@@ -113,7 +113,8 @@ class PromocionesController extends Controller
     public function store(Request $request)
     {
       try {
-        $DesdeNumero = 1;
+
+          $DesdeNumero = 1;
           $HastaNumero = 10000;
           $numeroAleatorio = rand($DesdeNumero, $HastaNumero);
 
@@ -196,6 +197,7 @@ class PromocionesController extends Controller
     public function stores(Request $request)
     {
       try {
+          //dd($request->all());
         $DesdeNumero = 1;
           $HastaNumero = 10000;
           $numeroAleatorio = rand($DesdeNumero, $HastaNumero);
@@ -211,13 +213,14 @@ class PromocionesController extends Controller
           $fecha_final_vigencia = $fecha;
 
           $descuento = Descuentos::find($request->descuentos_promocion);
+          $negocio = Negocio::where('id',1)->first();
           $nombre_promocion = 'Feliz Cumpleaños ';
           $descripcion = 'Pink and Gold Te deseamos feliz cumpleaños por lo tanto te regalamos el';
 
           foreach ($request->clientes_promocion as $key => $value_correo) {
               $email = [$value_correo];
               $subject = 'Promociones';
-              $message = $nombre_promocion.','.$descuento->descuento.','.$descripcion.','.$numeroAleatorio.','.$fecha_inicial_vigencia.','.$fecha_final_vigencia;
+              $message = $nombre_promocion.','.$descuento->descuento.','.$descripcion.','.$numeroAleatorio.','.$fecha_inicial_vigencia.','.$fecha_final_vigencia.','.$negocio->facebook.','.$negocio->instagram.','.$negocio->direccion.','.$negocio->telefono;
 
               Mail::to($email)->send( new Template_2($subject,$message ));
           }

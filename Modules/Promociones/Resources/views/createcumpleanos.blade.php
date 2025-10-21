@@ -22,7 +22,7 @@
 								<label for="exampleInputPassword1">Clientes</label>
 									<select class="form-control select2 select2-hidden-accessible " name="clientes_promocion" multiple="" data-placeholder="Selecciona Clientes" style="width: 100%;" tabindex="-1" aria-hidden="true">
 										@foreach($clientes as $cliente)
-										<option class="select2-selection--multiple" value="{{ $cliente->correo_electronico }}">{{ $cliente->nombre }}</option>
+										<option class="select2-selection--multiple" value="{{ $cliente->correo_electronico }}">{{ $cliente->nombre }} {{ $cliente->apellido_paterno }} {{ $cliente->apellido_materno }}</option>
 										@endforeach
 									</select>
 							</div>

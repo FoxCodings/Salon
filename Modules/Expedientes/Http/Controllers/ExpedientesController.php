@@ -5,12 +5,12 @@ namespace Modules\Expedientes\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use \Modules\Clientes2\Entities\Clientes;
-use \Modules\Ventas2\Entities\ServicioVentas;
+use \Modules\Clientes\Entities\Clientes;
+use \Modules\Ventas\Entities\ServicioVentas;
 use \Modules\Expedientes\Entities\Expediente;
 use \Modules\Expedientes\Entities\Formulas;
 
-use \Modules\Catalogos2\Entities\Servicios;
+use \Modules\Catalogos\Entities\Servicios;
 use Yajra\Datatables\Datatables;
 use Barryvdh\DomPDF\Facade as PDF;
 use \App\Models\User;

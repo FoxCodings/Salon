@@ -317,7 +317,7 @@ License: You must have a valid license purchased only from themeforest(the above
   </li>
 
   <li class="nav-item mb-2" data-toggle="tooltip" title="" data-placement="left" data-original-title="Agendar Cita">
-      <a class="btn btn-sm btn-icon btn-bg-light btn-icon-success btn-hover-succes"  href="/agenda2"  target="_blank">
+      <a class="btn btn-sm btn-icon btn-bg-light btn-icon-success btn-hover-succes"  href="/agendas"  target="_blank">
 			<i class="flaticon-calendar-1"></i>
 		</a>
 	</li>

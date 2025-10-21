@@ -8,11 +8,11 @@ use \Modules\Usuarios\Entities\RolesPermisos;
 use \Modules\Usuarios\Entities\ModeloRoles;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-use \Modules\Ventas2\Entities\ServicioVentas;
-use \Modules\Clientes2\Entities\Clientes;
-use \Modules\Empleados2\Entities\Empleados;
-use \Modules\Catalogos2\Entities\Productos;
-use \Modules\Catalogos2\Entities\Servicios;
+use \Modules\Ventas\Entities\ServicioVentas;
+use \Modules\Clientes\Entities\Clientes;
+use \Modules\Empleados\Entities\Empleados;
+use \Modules\Catalogos\Entities\Productos;
+use \Modules\Catalogos\Entities\Servicios;
 use Auth;
 use \DB;
 
@@ -25,7 +25,43 @@ class HomeController extends Controller
      */
     public function index()
     {
-      return view('dashboard');
+      $query ="
+      SELECT servicio, SUM(costo_servicio) AS total  FROM t_cat_ventas
+      WHERE activo = 1 and modulo = 1 GROUP BY servicio ";
+      $cursoss = DB::select($query);
+
+      $nombre_cursos = [];
+      $numero_cursos = [];
+
+      $data1 = array();
+      $data2 = array();
+
+
+      foreach ($cursoss as $key => $value) {
+
+        //$value->nombre_curso;
+
+        $data1[] = $value->servicio;
+        //$data2[] = $value->total;
+        // array_push($nombre_cursos,$value->nombre_curso.',');
+        array_push($data2,$value->total);
+      }
+      $data['data1'] = $data1;
+
+      $data['data2'] = $data2;
+
+      $querys ="
+      SELECT servicio, SUM(costo_servicio) AS total  FROM t_cat_ventas
+      WHERE activo = 1 and modulo = 1 GROUP BY servicio ";
+      $ventas = DB::select($querys);
+
+      $data['ventas'] = $ventas;
+
+      $data['total_clientes'] = Clientes::where([['activo',1],['modulo',1]])->count();
+      $data['total_empleados'] = Empleados::where([['activo',1],['modulo',1],['id','!=',1]])->count();
+      $data['total_productos'] = Productos::where([['activo',1],['modulo',1]])->count();
+      $data['total_servicios'] = Servicios::where([['activo',1]])->count();
+      return view('dashboard')->with($data);
     }
 
     public function dashboard_uno()

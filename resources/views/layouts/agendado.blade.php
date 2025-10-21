@@ -443,19 +443,9 @@ License: You must have a valid license purchased only from themeforest(the above
 </svg><!--end::Svg Icon--></span></div>
 
 <ul class="sticky-toolbar nav flex-column pl-2 pr-2 pt-3 pb-3 mt-4">
-	<!--begin::Item-->
-  	<!-- <li class="nav-item mb-2" id="kt_demo_panel_toggle" data-toggle="tooltip" title="" data-placement="right" data-original-title="Clientes Pendientes">
-  		<a class="btn btn-sm btn-icon btn-bg-light btn-icon-success btn-hover-success" onclick="clientes_pendientest()" >
-  			<i class="flaticon-users-1"></i>
-  		</a>
-  	</li>
-    <li class="nav-item mb-2" id="kt_demo_panel_toggle" data-toggle="tooltip" title="" data-placement="right" data-original-title="Lista de Clientes Pendientes">
-      <a class="btn btn-sm btn-icon btn-bg-light btn-icon-success btn-hover-success" onclick="Listaclientes_pendientest()" >
-        <i class="flaticon-interface-3"></i>
-      </a>
-    </li> -->
+
     <li class="nav-item mb-2" id="kt_demo_panel_toggle" data-toggle="tooltip" title="" data-placement="left" data-original-title="Venta Productos">
-        <a class="btn btn-sm btn-icon btn-bg-light btn-icon-success btn-hover-succes" onclick="ventaProducto()">
+        <a class="btn btn-sm btn-icon btn-bg-light btn-icon-success btn-hover-succes" onclick="ventaProductos()">
         <i class="flaticon2-shopping-cart"></i>
       </a>
     </li>
@@ -473,6 +463,9 @@ License: You must have a valid license purchased only from themeforest(the above
         <script>var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";</script>
         <!--begin::Global Config(global config for global JS scripts)-->
         <script>
+
+
+
             var KTAppSettings = {
     "breakpoints": {
         "sm": 576,

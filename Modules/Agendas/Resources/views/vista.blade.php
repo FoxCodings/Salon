@@ -1255,6 +1255,7 @@ var arrayGanador_Costos = [];
 
 
 
+
 $('#btn-scannear').hide()
 $('#btn-scannear2').hide()
 $('#productills').hide()
@@ -1279,6 +1280,30 @@ function Este(){
 function Estea(){
   $("#codigos").focus();
 }
+
+
+function ventaProductos(){
+
+  $('#servicios_ventitas').hide();
+  $('#productos_vetitas').show();
+  $('#productills').show();
+  $('#agendados').hide();
+
+  $('#clientes2').val('0').trigger('change.select2');
+  $('#empleados2').val('0').trigger('change.select2');
+
+
+}
+
+function citas(){
+  $('#productills').hide();
+  $('#clientes2').val('0').trigger('change.select2');
+  $('#empleados2').val('0').trigger('change.select2');
+  $('#agendados').show();
+
+
+}
+
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -3411,7 +3436,7 @@ $(function() {
           if (data.stock == 0) {
             //console.log(data.modulo)
             li.addClass("btn btn-danger font-weight-bold btn-square cuadrado");
-            li.append('<p  style="text-transform: uppercase;font-size:10px;"><i class="icon-md text-primary flaticon2-shopping-cart"></i>' + data.nombre+ '<br>$' + data.costo+ ' <small style="font-size: 9px;">stock <strong>'+data.stock+'</small></strong> </p>');
+            li.append('<p  style="text-transform: uppercase;font-size:10px;"><i class="icon-md text-white flaticon2-shopping-cart"></i>' + data.nombre+ '<br>$' + data.costo+ ' <small style="font-size: 9px;">stock <strong>'+data.stock+'</small></strong> </p>');
 
           }else{
             //console.log(data.modulo)
@@ -3430,32 +3455,12 @@ $(function() {
       // clear list before draw
       $('#new-list2').empty();
     },
-    language: { url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" }
+    language: { url: "https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" }
   });
 });
 
 
-  function ventaProducto(){
 
-    $('#servicios_ventitas').hide();
-    $('#productos_vetitas').show();
-    $('#productills').show();
-    $('#agendados').hide();
-
-    $('#clientes2').val('0').trigger('change.select2');
-    $('#empleados2').val('0').trigger('change.select2');
-
-
-  }
-
-  function citas(){
-    $('#productills').hide();
-    $('#clientes2').val('0').trigger('change.select2');
-    $('#empleados2').val('0').trigger('change.select2');
-    $('#agendados').show();
-
-
-  }
 
 
 

@@ -710,9 +710,9 @@ margin-top: 100px;
                   <div class="col-md-4 ">
                     <div class="form-group">
                       <label for="exampleInputPassword1">Clientes</label>
-                        <select class="form-control select2 select2-hidden-accessible " name="clientes_promocion" multiple="" data-placeholder="Selecciona Clientes" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                        <select class="form-control select2 select2-hidden-accessible " name="clientes_promocion2" multiple="" data-placeholder="Selecciona Clientes" style="width: 100%;" tabindex="-1" aria-hidden="true">
                           @foreach($clientes_cumpleanos as $cliente)
-                          <option class="select2-selection--multiple" value="{{ $cliente->correo_electronico }}">{{ $cliente->nombre }}</option>
+                          <option class="select2-selection--multiple" value="{{ $cliente->correo_electronico }}">{{ $cliente->nombre }} {{ $cliente->apellido_paterno }} {{ $cliente->apellido_materno }}</option>
                           @endforeach
                         </select>
                     </div>
@@ -721,7 +721,7 @@ margin-top: 100px;
                     <div class="form-group">
                     <label for="exampleInputPassword1">Descuentos <small style="color:red;font-size:10px;">*</small></label>
                     <div class="input-group">
-                      <select class="form-control" name="descuentos_promocion">
+                      <select class="form-control" name="descuentos_promocion2">
                         <option value="">Selecciona</option>
                         @foreach($descuentos as $des)
                         <option value="{{ $des->id }}">{{ $des->descuento }}</option>
@@ -734,7 +734,7 @@ margin-top: 100px;
                <div class="col-md-4 ">
                   <label>Fecha de Vigencia de Promoción <small style="color:red;font-size:10px;">*</small></label>
                   <div class="form-group">
-                      <input type="text" class="form-control pull-right" name="reservation" id="kt_datepicker3" >
+                      <input type="text" class="form-control pull-right" name="reservation2" id="kt_datepicker3" >
                   </div>
                 </div>
               </div>
@@ -1284,7 +1284,7 @@ margin-top: 100px;
                        </div>
                        <div class="modal-footer">
                            <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Cerrar</button>
-                           <button type="button" class="btn btn-primary font-weight-bold botoncito" onclick="guardarpromocioncumpleanos()">Enviar</button>
+                           <button type="button" class="btn btn-primary font-weight-bold botoncito" onclick="guardarpromocioncumpleanos3()">Enviar</button>
                        </div>
                    </div>
                </div>
@@ -2288,14 +2288,13 @@ function guardarpagoefectivo(){
 }
 
 function guardarpromocioncumpleanos(){
-  var clientes_promocion = $("select[name=clientes_promocion]").val();
+  var clientes_promocion = $("select[name=clientes_promocion2]").val();
 
-  var descuentos_promocion = $("select[name=descuentos_promocion]").val();
+  var descuentos_promocion = $("select[name=descuentos_promocion2]").val();
 
-  var fecha_vigencia = $('input[name=reservation]').val();
+  var fecha_vigencia = $('input[name=reservation2]').val();
 
   $('.botoncito').hide();
-
 
   if( descuentos_promocion == '' || clientes_promocion == '' || fecha_vigencia == ''){
 
@@ -2312,7 +2311,7 @@ function guardarpromocioncumpleanos(){
     $.ajax({
 
        type:"POST",
-       url:"/promociones2/creates",
+       url:"/promociones/creates",
        headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
        },
@@ -2336,10 +2335,10 @@ function guardarpromocioncumpleanos(){
           timer: 1500,
           showConfirmButton: false,
         }).then(function(result) {
-          $("select[name=clientes_promocion]").val('').trigger('change');
-          $("select[name=descuentos_promocion]").val("");
-          $("select[name=descuentos_promocion]").trigger("change");
-          $('input[name=reservation]').val('');
+          $("select[name=clientes_promocion2]").val('').trigger('change');
+          $("select[name=descuentos_promocion2]").val("");
+          $("select[name=descuentos_promocion2]").trigger("change");
+          $('input[name=reservation2]').val('');
           $('.botoncito').show();
           $('#promocion_cumpleanos').modal('hide');
 
@@ -2385,7 +2384,7 @@ function guardarpromocion(){
 
        type:"POST",
 
-       url:"/promociones2/create",
+       url:"/promociones/create",
        headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
        },
@@ -2785,7 +2784,7 @@ function guardarpromocion(){
 
                type:"POST", //si existe esta variable anillos se va mandar put sino se manda post
 
-               url:"/agendas2/create", //si existe colores manda la ruta de anillos el id del usario sino va mandar anillos crear
+               url:"/agendas/create", //si existe colores manda la ruta de anillos el id del usario sino va mandar anillos crear
                headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')//esto siempre debe ir en los ajax
                },
@@ -3478,7 +3477,7 @@ function guardarpromocion(){
         // clear list before draw
         $('#new-list').empty();
       },
-      language: { url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" }
+      language: { url: "https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" }
     });
   });
 
@@ -3531,7 +3530,7 @@ $(function() {
       // clear list before draw
       $('#new-list2').empty();
     },
-    language: { url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" }
+    language: { url: "https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" }
   });
 });
 

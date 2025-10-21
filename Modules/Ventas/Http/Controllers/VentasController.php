@@ -138,7 +138,7 @@ class VentasController extends Controller
 
 
          //dd($result);
-      $data['clientes_cumpleanos'] = Cliente_Cumpleano::where([['activo',1],['modulo',1]])->get();
+      $data['clientes_cumpleanos'] = Clientes::where([['activo',1],['modulo',1]])->get();
       $data['roles'] = Roles::all();
       $data['permisos'] = Permisos::where('activo',1)->get();
       $data['tratamientos'] = Alaciados::where('activo',1)->get();
@@ -151,7 +151,7 @@ class VentasController extends Controller
       $data['servicioses'] = ServiciosEX::where('activo',1)->get();
       $data['shellacs'] = Shellac::where('activo',1)->get();
       //$data['clientes'] = Clientes::where([['activo',1],['modulo',1]])->get();
-      $data['clientes'] = Clientes::where([['activo',1],['modulo',1],['id',1563]])->get();
+      $data['clientes'] = Clientes::where([['activo',1],['modulo',1]])->get();
 
       $data['empleados'] = Empleados::where([['activo',1],['modulo',1]])->get();
       $data['servicios'] = $result;
@@ -164,7 +164,7 @@ class VentasController extends Controller
       $data['id_cotizadores'] = Citas_diarias::where([
         ['activo',1],
       ])->select('fecha')->groupBy('fecha')->get();
-
+      //dd($data);
         return view('ventas::index')->with($data);
     }
 

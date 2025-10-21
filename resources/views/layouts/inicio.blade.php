@@ -121,7 +121,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!--begin::Aside-->
 <div class="aside aside-left  aside-fixed  d-flex flex-column flex-row-auto"  id="kt_aside" >
 
-  <div class="brand flex-column-auto " id="kt_brand" style="background:#ec5a93 ;">
+  <div class="brand flex-column-auto " id="kt_brand" style="background:#ad1457;">
 
     <a href="/dashboard" class="brand-logo">
       <img alt="Logo" src="/cremita/img/pgl_blanco.png" width="170" height="40"/>
@@ -140,7 +140,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
       </div>
 
-      <div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper" style="background:#ec5a93 ;">
+      <div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper" style="background:#ad1457 ;">
 
         <div
           id="kt_aside_menu"
@@ -149,7 +149,7 @@ License: You must have a valid license purchased only from themeforest(the above
            data-menu-scroll="1" data-menu-dropdown-timeout="500"      >
 
            <ul class="menu-nav ">
-             <li class="menu-item  menu-item-active" aria-haspopup="true" ><a  href="/dashboard_uno" class="menu-link ">
+             <li class="menu-item  menu-item-active" aria-haspopup="true" ><a  href="/dashboard" class="menu-link ">
                <span class="svg-icon menu-icon">
                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -242,7 +242,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
             	            <div class="topbar-item" data-toggle="dropdown" data-offset="10px,0px" onclick="boton_quitar()">
                             <div class="btn btn-icon btn-clean btn-lg mr-1" style="color: #fff;
-                                background-color: #ec5a93;
+                                background-color: #ad1457;
                                 border-color: #ec5a93;">
                                 <i class="far fa-bell icon-md text-white mr-5"></i>
                                 <span style="top:-1px;left:-3px" id="mensaje1"></span>
