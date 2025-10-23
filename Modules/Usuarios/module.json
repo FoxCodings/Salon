@@ -43,7 +43,7 @@
 
             ]
         },
-        "Archivos": {
+        "Carta Recomendacion": {
             "enlace": "/usuarios/archivos",
             "icono": "fas fa-table",
             "permises": [

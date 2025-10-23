@@ -18,6 +18,6 @@ class Recomendacion extends Model{
     'cve_usuario',
   ];
   public function obtEmpleados(){
-    return $this->hasOne('\Modules\Empleados2\Entities\Empleados', 'id', 'id_empleado');
+    return $this->hasOne('\Modules\Empleados\Entities\Empleados', 'id', 'id_empleado');
   }
 }

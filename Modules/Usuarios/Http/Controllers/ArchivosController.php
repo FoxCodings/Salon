@@ -6,7 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use \Modules\Usuarios\Entities\Recomendacion;
-use \Modules\Empleados2\Entities\Empleados;
+use \Modules\Empleados\Entities\Empleados;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Storage;
@@ -41,7 +41,7 @@ class ArchivosController extends Controller
      */
     public function create()
     {
-        $data['empleados'] = Empleados::where([['activo',1],['modulo',2],['id','!=',1]])->get();
+        $data['empleados'] = Empleados::where([['activo',1],['modulo',1],['id','!=',1]])->get();
         return view('usuarios::archivos.create')->with($data);
     }
 
@@ -88,7 +88,7 @@ class ArchivosController extends Controller
     public function edit($id)
     {
         $data['archivos'] = Recomendacion::find($id);
-        $data['empleados'] = Empleados::where([['activo',1],['modulo',2],['id','!=',1]])->get();
+        $data['empleados'] = Empleados::where([['activo',1],['modulo',1],['id','!=',1]])->get();
         return view('usuarios::archivos.create')->with($data);
     }
 

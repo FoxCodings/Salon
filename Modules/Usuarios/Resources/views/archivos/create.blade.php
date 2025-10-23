@@ -1,11 +1,11 @@
-@extends('layouts.index')
+@extends('layouts.inicio')
 
 @section('content')
 <div class="card card-custom example example-compact">
 <div class="card-header">
 <h3 class="card-title">
 
- @isset($archivos) Editar @else Nuevo @endisset   Carta
+ @isset($archivos) Editar @else Nueva @endisset   Carta Recomendacion
 </h3>
 <div class="card-toolbar">
 <div class="example-tools justify-content-center">

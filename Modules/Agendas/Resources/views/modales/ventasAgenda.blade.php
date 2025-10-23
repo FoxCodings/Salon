@@ -1,7 +1,6 @@
 <!-- ///// -->
 <div class=" container " id="productills">
-  <div class="card card-custom example example-compact">
-    <div class="card-body">
+
       <div class="row">
 
       <div class="col-md-8">
@@ -82,7 +81,7 @@
                               <tr >
                                   <th >Servicio</th>
                                   <th >Costo</th>
-                                  <th >Acciones</th>
+                                  <th >Accion</th>
                               </tr>
                           </thead>
                           <tbody >
@@ -159,6 +158,5 @@
 
 
       </div>
-    </div>
-  </div>
+
 </div>

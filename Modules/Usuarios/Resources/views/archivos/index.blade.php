@@ -1,10 +1,10 @@
-@extends('layouts.index')
+@extends('layouts.inicio')
 
 @section('content')
 <div class="card card-custom example example-compact">
 <div class="card-header">
 <h3 class="card-title">
-  Archivos
+  Cartas de Recomendaciones
 </h3>
 <div class="card-toolbar">
 

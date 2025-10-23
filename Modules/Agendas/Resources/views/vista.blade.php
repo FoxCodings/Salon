@@ -3,17 +3,61 @@
 @section('content')
   <link rel="stylesheet" href="/css/fullcalendar.min.css" />
 
-<style media="screen">
+<!-- <style media="screen">
 .container {
 width: 1000%;
 /* padding-right: 12.5px; */
 /* padding-left: 60px; */
 /* margin-right: 60px; */
 /* margin-left: 60px; */
-margin-top: 50px;
-margin-bottom:10px;
+margin: 0 auto; /* centra el contenido */
+box-sizing: border-box;
+padding: 80px 80px;
+}
+
+</style> -->
+
+<style>
+/* 🔹 Contenedor principal ajustado para dashboards con sidebar + navbar */
+.container {
+  width: 100%;
+  max-width: 1400px; /* Evita que crezca demasiado en pantallas grandes */
+  margin: 70px auto 40px auto; /* margen superior, centrado y espacio inferior */
+  padding: 80px 80px; /* espacio interno a los lados */
+  background-color: #fff; /* opcional si quieres separar del fondo */
+  border-radius: 8px; /* opcional: bordes suaves */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* ligera sombra */
+  box-sizing: border-box;
+}
+
+/* 🔹 Ajusta el contenido del calendario */
+#agendados .card {
+  border: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* 🔹 Ajusta tabla con scroll */
+.dataTables_scrollBody {
+  border-radius: 6px;
+  background-color: #fff;
+}
+
+/* 🔹 Evita que se pegue a la barra lateral */
+body {
+  background-color: #f5f6fa; /* gris claro */
+  padding-left: 20px; /* separación del sidebar si no lo maneja el layout */
+  padding-right: 20px;
+}
+
+/* 🔹 Título y botones */
+h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
 }
 </style>
+
 <link href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css' rel='stylesheet'>
 
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" /> -->
@@ -127,19 +171,21 @@ ul li {
   background-color: #C9A94E;
   border-color: transparent;
 }
-.container {
+.bones{
+  background:#f8bbd0;
+}
+
+/* .container {
 width: 100%;
 padding-right: 12.5px;
 padding-left: 12.5px;
 margin-right: auto;
 margin-left: auto;
 margin-top: 100px;
-}
+} */
 </style>
 <div class=" container " id="agendados">
-  <div class="card card-custom example example-compact">
 
-  <div class="card-body">
 
       <div class="row">
         <div class="col-md-12 ">
@@ -189,12 +235,7 @@ margin-top: 100px;
 
 
 
-  </div>
 
-
-
-
-  </div>
 </div>
 @include('agendas::modales.ventasAgenda')
 
@@ -3430,7 +3471,7 @@ $(function() {
       //console.log(data)
       var numero = 2;
         var li = $(document.createElement('li'));
-          li.addClass("btn btn-primary font-weight-bold btn-square cuadrado");
+          li.addClass("btn bones font-weight-bold btn-square cuadrado");
             //console.log(data.modulo)
         if (data.categoria == 1) {
           if (data.stock == 0) {
@@ -3440,13 +3481,13 @@ $(function() {
 
           }else{
             //console.log(data.modulo)
-            li.append('<p onclick="agregarservicios('+data.id+','+data.modulo+','+numero+')" style="text-transform: uppercase;font-size:10px;"><i class="icon-md text-primary flaticon2-shopping-cart"></i>' + data.nombre+ '<br>$' + data.costo+ ' <small style="font-size: 9px;">stock <strong>'+data.stock+'</small></strong> </p>');
+            li.append('<p onclick="agregarservicios('+data.id+','+data.modulo+','+numero+')" style="text-transform: uppercase;font-size:10px;"><i class="icon-md text-white flaticon2-shopping-cart"></i><strong style="color:white;">' + data.nombre+ '<br>$' + data.costo+ '<small style="font-size: 9px;">stock <strong>'+data.stock+'</small></strong></strong> </p>');
           }
 
         }else if(data.categoria == 2){
           //console.log(data.modulo)
 
-          li.append('<p onclick="agregarservicios('+data.id+','+data.modulo+','+numero+')" style="text-transform: uppercase;font-size:10px;"><i class="icon-md text-primary flaticon2-shopping-cart"></i>' + data.nombre+ '<br>$' + data.costo+ '</p>');
+          li.append('<p onclick="agregarservicios('+data.id+','+data.modulo+','+numero+')" style="text-transform: uppercase;font-size:10px;"><i class="icon-md text-white flaticon2-shopping-cart"></i>' + data.nombre+ '<br>$' + data.costo+ '</p>');
 
         }
         li.appendTo('#new-list2');

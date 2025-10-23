@@ -336,7 +336,6 @@ function guardar(){
 
     if (nombre == '' ||
 apellido_paterno == '' ||
-apellido_materno == '' ||
 direccion == '' ||
 inicial == '' ||
 telefono == '' ||
